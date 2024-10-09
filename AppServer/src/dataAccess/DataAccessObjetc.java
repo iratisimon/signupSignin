@@ -6,11 +6,32 @@
 package dataAccess;
 
 import logicalModel.interfaces.Signable;
+import logicalModel.model.User;
 
 /**
  *
  * @author 2dam
  */
 public class DataAccessObjetc implements Signable{ 
+
+    @Override
+    public User signIn() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User signUp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeApp() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeSession() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

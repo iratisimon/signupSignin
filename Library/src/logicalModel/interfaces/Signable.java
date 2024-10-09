@@ -5,10 +5,15 @@
  */
 package logicalModel.interfaces;
 
+import logicalModel.model.User;
+
 /**
  *
  * @author 2dam
  */
 public interface Signable {
-    
+    public User signIn();
+    public User signUp();
+    public void closeApp();
+    public void closeSession();
 }
