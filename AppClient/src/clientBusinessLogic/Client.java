@@ -5,13 +5,15 @@
  */
 package clientBusinessLogic;
 
+import logicalModel.interfaces.Signable;
+
 
 /**
  *
  * @author 2dam
  * Implementa la interfaz
  */
-public class Client  {
+public class Client implements Signable{
 
     
     
