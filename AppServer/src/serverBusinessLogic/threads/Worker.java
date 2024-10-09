@@ -9,6 +9,6 @@ package serverBusinessLogic.threads;
  *
  * @author 2dam
  */
-public class Worker {
+public class Worker extends Thread {
     
 }

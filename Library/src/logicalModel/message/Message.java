@@ -5,7 +5,6 @@
  */
 package logicalModel.message;
 
-import logicalModel.message.MessageType;
 import java.io.Serializable;
 import logicalModel.model.User;
 

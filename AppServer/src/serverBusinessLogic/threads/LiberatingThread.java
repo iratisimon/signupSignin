@@ -5,10 +5,12 @@
  */
 package serverBusinessLogic.threads;
 
+import serverBusinessLogic.interfaces.Closable;
+
 /**
  *
  * @author 2dam
  */
-public class LiberatingThread {
+public class LiberatingThread extends Thread implements Closable {
     
 }
