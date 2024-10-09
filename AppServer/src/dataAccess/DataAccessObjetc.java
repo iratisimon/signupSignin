@@ -5,10 +5,12 @@
  */
 package dataAccess;
 
+import logicalModel.interfaces.Signable;
+
 /**
  *
  * @author 2dam
  */
-public class DataAccessObjetc { //implements Signable 
+public class DataAccessObjetc implements Signable{ 
     
 }
