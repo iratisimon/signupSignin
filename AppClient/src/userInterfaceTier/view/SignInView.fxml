@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,23 +14,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="621.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignInController">
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignInController">
     <children>
-      <ImageView fitHeight="419.0" fitWidth="563.0" layoutX="31.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="550.0" fitWidth="917.0" layoutX="92.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/images/Fondo_SignIn.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="38.0" fitWidth="142.0" layoutX="242.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="73.0" fitWidth="204.0" layoutX="378.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/images/Titulo_SigIn.png" />
          </image>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="143.0" layoutY="126.0" prefHeight="174.0" prefWidth="334.0">
+      <VBox alignment="CENTER" layoutX="309.0" layoutY="159.0" prefHeight="251.0" prefWidth="341.0">
          <children>
-            <HBox prefHeight="132.0" prefWidth="271.0">
+            <HBox prefHeight="42.0" prefWidth="379.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="58.0" text="User" textAlignment="RIGHT">
+                  <Label fx:id="emailLabel" prefHeight="30.0" prefWidth="58.0" text="Email" textAlignment="RIGHT">
                      <font>
                         <Font name="Algerian" size="12.0" />
                      </font>
@@ -37,7 +38,7 @@
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="193.0">
+                  <TextField fx:id="emailText" prefHeight="26.0" prefWidth="194.0">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -46,24 +47,24 @@
             </HBox>
             <HBox prefHeight="26.0" prefWidth="240.0" spacing="15.0">
                <children>
-                  <Label prefHeight="40.0" prefWidth="62.0" text="Password">
+                  <Label fx:id="passwrdLabel" prefHeight="40.0" prefWidth="62.0" text="Password">
                      <font>
                         <Font name="Algerian" size="12.0" />
                      </font>
                   </Label>
-                  <PasswordField prefHeight="26.0" prefWidth="196.0" />
-                  <Button mnemonicParsing="false" prefHeight="18.0" prefWidth="26.0" text="Button" textFill="WHITE">
+                  <PasswordField fx:id="passwrdText" prefHeight="26.0" prefWidth="196.0" />
+                  <ToggleButton mnemonicParsing="false">
                      <graphic>
-                        <ImageView fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="passwrdButton" fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/images/ShowPasswd.png" />
+                              <Image url="@../../resources/images/HidePasswd.png" />
                            </image>
                         </ImageView>
                      </graphic>
-                  </Button>
+                  </ToggleButton>
                </children>
             </HBox>
-            <Label prefHeight="28.0" prefWidth="102.0" text="Text for errors" textFill="#ff0303">
+            <Label fx:id="errorLabel" prefHeight="28.0" prefWidth="102.0" text="Text for errors" textFill="#ff0303">
                <padding>
                   <Insets top="10.0" />
                </padding>
@@ -72,7 +73,7 @@
                </VBox.margin>
             </Label>
       
-              <Button fx:id="button" onAction="#handleButtonAction" prefHeight="18.0" prefWidth="51.0" style="-fx-background-color: ffad0f;" text="Accept" textAlignment="CENTER">
+              <Button id="acceptButton" fx:id="button" onAction="#handleButtonAction" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: ffad0f;" text="Accept" textAlignment="CENTER">
                <font>
                   <Font name="Algerian" size="10.0" />
                </font>
@@ -80,10 +81,10 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Button>
-            <HBox alignment="CENTER" prefHeight="54.0" prefWidth="305.0" spacing="5.0">
+            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="418.0" spacing="5.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="155.0" text="Do you not have an account?" />
-                  <Hyperlink text="Sign In" textFill="#ffad0f" />
+                  <Label id="signInLabel" prefHeight="18.0" prefWidth="199.0" text="Do you not have an account?" />
+                  <Hyperlink id="signInLink" text="Sign In" textFill="#ffad0f" />
                </children>
                <padding>
                   <Insets top="30.0" />

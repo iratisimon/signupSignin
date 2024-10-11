@@ -15,4 +15,25 @@ import logicalModel.model.User;
 public class Message implements Serializable{ //para trasmitir el mensaje en forma de bytes a la base de datos
     private User user;
     private MessageType message;
+
+    public Message(User user, MessageType message) {
+        this.user = user;
+        this.message = message;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public MessageType getMessage() {
+        return message;
+    }
+
+    public void setMessage(MessageType message) {
+        this.message = message;
+    }
 }

@@ -20,11 +20,13 @@ public class ClientApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/userInterfaceTier/view/SignInView.fxml"));
+
         
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("Sign In");
         stage.show();
     }
 
