@@ -4,10 +4,16 @@
  * and open the template in the editor.
  */
 package clientBusinessLogic;
+
+import logicalModel.interfaces.Signable;
+
 /**
  *
  * @author 2dam
  */
 public class ClientFactory {
-
+    
+    public static Signable getSignable(){
+        return new Client();
+    }
 }

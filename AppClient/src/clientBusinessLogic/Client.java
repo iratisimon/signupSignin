@@ -17,13 +17,13 @@ import logicalModel.model.User;
 public class Client implements Signable{
 
     @Override
-    public User signIn() {
+    public User signIn(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User signUp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public User signUp(User user) {
+        return user;
     }
 
     @Override

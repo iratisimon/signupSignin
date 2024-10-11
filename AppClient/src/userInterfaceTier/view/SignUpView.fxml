@@ -30,7 +30,7 @@
                            <image>
                               <Image url="@../../resources/images/usuario.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="fullName" prefHeight="25.0" prefWidth="297.0" text="Full name" />
+                        <TextField fx:id="tfFullName" prefHeight="25.0" prefWidth="297.0" text="Full name" />
                      </children>
                   </HBox>
                   <Label fx:id="labelFullName" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
@@ -44,7 +44,7 @@
                            <image>
                               <Image url="@../../resources/images/email.png" />
                            </image></ImageView>
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="E-mail" />
+                        <TextField fx:id="tfEmail" prefHeight="25.0" prefWidth="297.0" text="E-mail" />
                      </children>
                   </HBox>
                   <Label fx:id="labelEmail" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
@@ -58,7 +58,7 @@
                            <image>
                               <Image url="@../../resources/images/cerrar.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="passwd" prefHeight="25.0" prefWidth="297.0" text="Password" />
+                        <TextField fx:id="pfPassword" prefHeight="25.0" prefWidth="297.0" text="Password" />
                         <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
@@ -77,7 +77,7 @@
                            <image>
                               <Image url="@../../resources/images/cerrar.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="repeatPasswd" prefHeight="25.0" prefWidth="297.0" text="Repeat Password" />
+                        <TextField fx:id="pfConfirmPassword" prefHeight="25.0" prefWidth="297.0" text="Repeat Password" />
                         <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
@@ -97,7 +97,7 @@
                               <Image url="@../../resources/images/street.png" />
                            </image>
                         </ImageView>
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="Street" />
+                        <TextField fx:id="tfStreet" prefHeight="25.0" prefWidth="297.0" text="Street" />
                      </children>
                   </HBox>
                   <Label fx:id="labelEmail1" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
@@ -127,7 +127,7 @@
                                  <image>
                                     <Image url="@../../resources/images/edificio-de-la-ciudad.jpg" />
                                  </image></ImageView>
-                              <TextField fx:id="city" prefHeight="25.0" prefWidth="133.0" text="City" />
+                              <TextField fx:id="tfCity" prefHeight="25.0" prefWidth="133.0" text="City" />
                            </children>
                         </HBox>
                         <Label fx:id="labelCity" textFill="#fff600" />
@@ -145,7 +145,7 @@
                                  <image>
                                     <Image url="@../../resources/images/telefono.png" />
                                  </image></ImageView>
-                              <TextField fx:id="mobile" text="Phone Number" />
+                              <TextField fx:id="tfMobile" text="Phone Number" />
                            </children>
                         </HBox>
                         <Label fx:id="labelMobile" textFill="#fff600" />
@@ -153,7 +153,7 @@
                   </VBox>
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <CheckBox fx:id="active" alignment="TOP_CENTER" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 2;" text="¿Active User?">
+                        <CheckBox fx:id="cbActive" alignment="TOP_CENTER" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 2;" text="¿Active User?">
                            <padding>
                               <Insets bottom="4.0" left="5.0" right="7.0" top="4.0" />
                            </padding>
@@ -164,7 +164,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonSignUp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: orange;" text="SIGN UP" textAlignment="CENTER" />
+                  <Button fx:id="btnSignUp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: orange;" text="SIGN UP" textAlignment="CENTER" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="28.0" prefWidth="296.0" spacing="10.0">
@@ -180,7 +180,7 @@
                         <Insets top="4.0" />
                      </padding>
                   </Label>
-                  <Hyperlink fx:id="buttonSignIn" text="Sign In" textFill="#fbff00" underline="true">
+                  <Hyperlink fx:id="hpSignIn" text="Sign In" textFill="#fbff00" underline="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

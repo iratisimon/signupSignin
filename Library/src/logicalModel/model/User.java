@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String email;
     private String passwd;
     private String name;
-    private String nick;
+    private String street;
     private int mobile;
     private String city;
     private int zip;
@@ -24,11 +24,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String email, String passwd, String name, String nick, int mobile, String city, int zip, boolean active) {
+    public User(String email, String passwd, String name, String street, int mobile, String city, int zip, boolean active) {
         this.email = email;
         this.passwd = passwd;
         this.name = name;
-        this.nick = nick;
+        this.street = street;
         this.mobile = mobile;
         this.city = city;
         this.zip = zip;
@@ -64,12 +64,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getNick() {
-        return nick;
+    public String getStreet() {
+        return street;
     }
 
-    public void setNick(String nick) {
-        this.nick = nick;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public int getMobile() {
