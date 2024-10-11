@@ -19,14 +19,17 @@
             <Image url="@../../resources/images/backgroundSignUp.png" />
          </image>
       </ImageView>
-      <VBox layoutX="582.0" layoutY="43.0" prefHeight="393.0" prefWidth="321.0">
+      <VBox layoutX="588.0" layoutY="73.0" prefHeight="393.0" prefWidth="321.0" spacing="10.0">
          <children>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="Full name" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/usuario.jpg" />
+                           </image></ImageView>
+                        <TextField fx:id="fullName" prefHeight="25.0" prefWidth="297.0" text="Full name" />
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="265.0" text="Label" textFill="#fff600" />
@@ -34,10 +37,13 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="Nick Name" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/usuario.jpg" />
+                           </image></ImageView>
+                        <TextField fx:id="email" prefHeight="25.0" prefWidth="297.0" text="Nick Name" />
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="265.0" text="Label" textFill="#fff600" />
@@ -45,9 +51,12 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/email.png" />
+                           </image></ImageView>
                         <TextField prefHeight="25.0" prefWidth="297.0" text="E-mail" />
                      </children>
                   </HBox>
@@ -56,10 +65,18 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="Password" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/cerrar.jpg" />
+                           </image></ImageView>
+                        <TextField fx:id="passwd" prefHeight="25.0" prefWidth="297.0" text="Password" />
+                        <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/ShowPasswdOrange.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="265.0" text="Label" textFill="#fff600" />
@@ -67,10 +84,18 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                        <TextField prefHeight="25.0" prefWidth="297.0" text="Repeat Password" />
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/cerrar.jpg" />
+                           </image></ImageView>
+                        <TextField fx:id="repeatPasswd" prefHeight="25.0" prefWidth="297.0" text="Repeat Password" />
+                        <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/images/ShowPasswdOrange.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                   <Label prefHeight="17.0" prefWidth="265.0" text="Label" textFill="#fff600" />
@@ -80,10 +105,13 @@
                <children>
                   <VBox prefHeight="53.0" prefWidth="152.0">
                      <children>
-                        <HBox prefHeight="30.0" prefWidth="116.0">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="116.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                              <TextField text="Postal Code" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/images/postal.png" />
+                                 </image></ImageView>
+                              <TextField fx:id="postal" text="Postal Code" />
                            </children>
                         </HBox>
                         <Label text="Label" textFill="#fff600" />
@@ -91,10 +119,13 @@
                   </VBox>
                   <VBox prefHeight="53.0" prefWidth="153.0">
                      <children>
-                        <HBox prefHeight="30.0" prefWidth="150.0">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="150.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                              <TextField prefHeight="25.0" prefWidth="133.0" text="City" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/images/edificio-de-la-ciudad.jpg" />
+                                 </image></ImageView>
+                              <TextField fx:id="city" prefHeight="25.0" prefWidth="133.0" text="City" />
                            </children>
                         </HBox>
                         <Label text="Label" textFill="#fff600" />
@@ -102,43 +133,52 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="52.0" prefWidth="340.0" spacing="100.0">
+            <HBox prefHeight="52.0" prefWidth="340.0" spacing="60.0">
                <children>
                   <VBox prefHeight="53.0" prefWidth="152.0">
                      <children>
-                        <HBox prefHeight="30.0" prefWidth="116.0">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="116.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" />
-                              <TextField text="Phone Number" />
+                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../resources/images/telefono.png" />
+                                 </image></ImageView>
+                              <TextField fx:id="mobile" text="Phone Number" />
                            </children>
                         </HBox>
                         <Label text="Label" textFill="#fff600" />
                      </children>
                   </VBox>
-                  <Button alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-color: orange;" text="SIGN UP" textAlignment="CENTER" />
+                  <Button fx:id="buttonSignUp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: orange;" text="SIGN UP" textAlignment="CENTER" />
                </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="28.0" prefWidth="296.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="15.0" prefWidth="224.0" text="Do you already have an account?" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets top="4.0" />
+                     </padding>
+                  </Label>
+                  <Hyperlink fx:id="buttonSignIn" text="Sign In" textFill="#fbff00" underline="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
-      <HBox layoutX="598.0" layoutY="450.0" prefHeight="28.0" prefWidth="296.0" spacing="10.0">
-         <children>
-            <Label prefHeight="15.0" prefWidth="224.0" text="Do you already have an account?" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-               <padding>
-                  <Insets top="4.0" />
-               </padding>
-            </Label>
-            <Hyperlink text="Sign In" textFill="#fbff00" underline="true">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Hyperlink>
-         </children>
-      </HBox>
    </children>
 </AnchorPane>
