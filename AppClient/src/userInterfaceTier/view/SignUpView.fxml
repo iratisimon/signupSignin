@@ -13,24 +13,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-image: '/resources/images/backgroundSignUp.png'; -fx-background-size: cover;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignUpController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignUpController">
    <children>
-      <ImageView fitHeight="540.0" fitWidth="969.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="540.0" fitWidth="969.0" layoutX="-22.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/images/backgroundSignUp.png" />
          </image>
       </ImageView>
-      <VBox layoutX="592.0" layoutY="58.0" prefHeight="393.0" prefWidth="321.0" spacing="7.0">
+      <VBox layoutX="502.0" layoutY="32.0" prefHeight="422.0" prefWidth="443.0" spacing="7.0">
          <children>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="Full name:" textFill="WHITE">
+                           <font>
+                              <Font name="Algerian" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgFullName" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/usuario.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="tfFullName" prefHeight="25.0" prefWidth="297.0" text="Full name" />
+                        <TextField fx:id="tfFullName" prefHeight="26.0" prefWidth="252.0" text="Full name" />
                      </children>
                   </HBox>
                   <Label fx:id="labelFullName" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
@@ -38,13 +46,21 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="E-mail:" textFill="WHITE">
+                           <font>
+                              <Font name="Algerian" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgEmail" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/email.png" />
                            </image></ImageView>
-                        <TextField fx:id="tfEmail" prefHeight="25.0" prefWidth="297.0" text="E-mail" />
+                        <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="251.0" text="E-mail" />
                      </children>
                   </HBox>
                   <Label fx:id="labelEmail" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
@@ -52,13 +68,21 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="Password: " textFill="WHITE">
+                           <font>
+                              <Font name="Algerian" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgPassword" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/cerrar.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="pfPassword" prefHeight="25.0" prefWidth="297.0" text="Password" />
+                        <TextField fx:id="pfPassword" prefHeight="26.0" prefWidth="227.0" text="Password" />
                         <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
@@ -71,13 +95,21 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="Repeat password: " textFill="WHITE">
+                           <font>
+                              <Font name="Algerian" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgRepeatPassword" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/cerrar.jpg" />
                            </image></ImageView>
-                        <TextField fx:id="pfConfirmPassword" prefHeight="25.0" prefWidth="297.0" text="Repeat Password" />
+                        <TextField fx:id="pfConfirmPassword" prefHeight="26.0" prefWidth="227.0" text="Repeat Password" />
                         <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
@@ -90,40 +122,64 @@
             </VBox>
             <VBox prefHeight="50.0" prefWidth="263.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <Label text="Street: " textFill="WHITE">
+                           <font>
+                              <Font name="Algerian" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ImageView fx:id="imgStreet" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/street.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="tfStreet" prefHeight="25.0" prefWidth="297.0" text="Street" />
+                        <TextField fx:id="tfStreet" prefHeight="26.0" prefWidth="251.0" text="Street" />
                      </children>
                   </HBox>
-                  <Label fx:id="labelEmail1" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
+                  <Label fx:id="labelStreet" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
                </children>
             </VBox>
-            <HBox prefHeight="53.0" prefWidth="342.0" spacing="20.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="342.0">
                <children>
-                  <VBox prefHeight="53.0" prefWidth="152.0">
+                  <VBox prefHeight="43.0" prefWidth="333.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="116.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="215.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <Label text="ZIP:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Algerian" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ImageView fx:id="imgZip" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/images/postal.png" />
                                  </image></ImageView>
-                              <TextField fx:id="postal" text="Postal Code" />
+                              <TextField fx:id="tfZip" prefHeight="26.0" prefWidth="122.0" text="Postal Code" />
                            </children>
                         </HBox>
                         <Label fx:id="labelPostal" textFill="#fff600" />
                      </children>
                   </VBox>
-                  <VBox prefHeight="53.0" prefWidth="153.0">
+                  <VBox prefHeight="43.0" prefWidth="321.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="150.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="150.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <Label text="City:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Algerian" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ImageView fx:id="imgCity" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/images/edificio-de-la-ciudad.jpg" />
                                  </image></ImageView>
@@ -135,28 +191,39 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="52.0" prefWidth="340.0" spacing="20.0">
+            <HBox prefHeight="52.0" prefWidth="340.0">
                <children>
-                  <VBox prefHeight="43.0" prefWidth="202.0">
+                  <VBox alignment="CENTER_RIGHT" prefHeight="43.0" prefWidth="250.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="130.0">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="130.0">
                            <children>
-                              <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                              <Label text="Phone:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Algerian" size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ImageView fx:id="imgMobile" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../resources/images/telefono.png" />
                                  </image></ImageView>
-                              <TextField fx:id="tfMobile" text="Phone Number" />
+                              <TextField fx:id="tfMobile" prefHeight="26.0" prefWidth="125.0" text="Phone Number" />
                            </children>
                         </HBox>
                         <Label fx:id="labelMobile" textFill="#fff600" />
                      </children>
                   </VBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="TOP_CENTER" prefHeight="43.0" prefWidth="234.0">
                      <children>
-                        <CheckBox fx:id="cbActive" alignment="TOP_CENTER" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 2;" text="¿Active User?">
+                        <CheckBox fx:id="cbActive" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 2;" text="¿Active User?">
                            <padding>
                               <Insets bottom="4.0" left="5.0" right="7.0" top="4.0" />
                            </padding>
+                           <HBox.margin>
+                              <Insets left="15.0" />
+                           </HBox.margin>
                         </CheckBox>
                      </children>
                   </HBox>
