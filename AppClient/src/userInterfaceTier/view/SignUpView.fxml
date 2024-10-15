@@ -164,7 +164,7 @@
                               <TextField fx:id="tfZip" prefHeight="26.0" prefWidth="122.0" text="Postal Code" />
                            </children>
                         </HBox>
-                        <Label fx:id="labelPostal" textFill="#fff600" />
+                        <Label fx:id="labelZip" textFill="#fff600" />
                      </children>
                   </VBox>
                   <VBox prefHeight="43.0" prefWidth="321.0">
