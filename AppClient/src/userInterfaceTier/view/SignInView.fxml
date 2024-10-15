@@ -14,83 +14,83 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignInController">
+<AnchorPane fx:id="AnchorPane" prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.SignInController">
     <children>
-      <ImageView fitHeight="550.0" fitWidth="917.0" layoutX="92.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/images/Fondo_SignIn.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="73.0" fitWidth="204.0" layoutX="378.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/images/Titulo_SigIn.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="CENTER" layoutX="309.0" layoutY="159.0" prefHeight="251.0" prefWidth="341.0">
-         <children>
-            <HBox prefHeight="42.0" prefWidth="379.0">
-               <children>
-                  <Label fx:id="emailLabel" prefHeight="30.0" prefWidth="58.0" text="Email" textAlignment="RIGHT">
-                     <font>
-                        <Font name="Algerian" size="12.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="20.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="emailText" prefHeight="26.0" prefWidth="194.0">
-                     <HBox.margin>
+        <ImageView fitHeight="550.0" fitWidth="917.0" layoutX="92.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/images/Fondo_SignIn.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="73.0" fitWidth="204.0" layoutX="378.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/images/Titulo_SigIn.png" />
+            </image>
+        </ImageView>
+        <VBox alignment="CENTER" layoutX="309.0" layoutY="159.0" prefHeight="251.0" prefWidth="341.0">
+            <children>
+                <HBox prefHeight="42.0" prefWidth="379.0">
+                    <children>
+                        <Label prefHeight="30.0" prefWidth="58.0" text="Email" textAlignment="RIGHT">
+                            <font>
+                                <Font name="Algerian" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="emailText" prefHeight="26.0" prefWidth="194.0">
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </TextField>
+                    </children>
+                </HBox>
+                <HBox prefHeight="26.0" prefWidth="240.0" spacing="15.0">
+                    <children>
+                        <Label fx:id="passwrdLabel" prefHeight="40.0" prefWidth="62.0" text="Password">
+                            <font>
+                                <Font name="Algerian" size="12.0" />
+                            </font>
+                        </Label>
+                        <PasswordField fx:id="pfPasswrd" prefHeight="26.0" prefWidth="196.0" />
+                        <ToggleButton fx:id="tgbtnEyeIcon" mnemonicParsing="false">
+                            <graphic>
+                                <ImageView fx:id="ivEyeIcon" fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../resources/images/HidePasswd.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </ToggleButton>
+                    </children>
+                </HBox>
+                <Label fx:id="lblError" prefHeight="28.0" prefWidth="102.0" text="Text for errors" textFill="#ff0303">
+                    <padding>
+                        <Insets top="10.0" />
+                    </padding>
+                    <VBox.margin>
                         <Insets />
-                     </HBox.margin>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox prefHeight="26.0" prefWidth="240.0" spacing="15.0">
-               <children>
-                  <Label fx:id="passwrdLabel" prefHeight="40.0" prefWidth="62.0" text="Password">
-                     <font>
-                        <Font name="Algerian" size="12.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="passwrdText" prefHeight="26.0" prefWidth="196.0" />
-                  <ToggleButton mnemonicParsing="false">
-                     <graphic>
-                        <ImageView fx:id="passwrdButton" fitHeight="19.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../resources/images/HidePasswd.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-               </children>
-            </HBox>
-            <Label fx:id="errorLabel" prefHeight="28.0" prefWidth="102.0" text="Text for errors" textFill="#ff0303">
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Label>
+                    </VBox.margin>
+                </Label>
       
-              <Button id="acceptButton" fx:id="button" onAction="#handleButtonAction" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: ffad0f;" text="Accept" textAlignment="CENTER">
-               <font>
-                  <Font name="Algerian" size="10.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Button>
-            <HBox alignment="CENTER" prefHeight="42.0" prefWidth="418.0" spacing="5.0">
-               <children>
-                  <Label id="signInLabel" prefHeight="18.0" prefWidth="199.0" text="Do you not have an account?" />
-                  <Hyperlink id="signInLink" text="Sign In" textFill="#ffad0f" />
-               </children>
-               <padding>
-                  <Insets top="30.0" />
-               </padding>
-            </HBox>
-         </children>
-      </VBox>
+                <Button fx:id="btnAccept" onAction="#handleButtonAction" prefHeight="18.0" prefWidth="62.0" style="-fx-background-color: ffad0f;" text="Accept" textAlignment="CENTER">
+                    <font>
+                        <Font name="Algerian" size="10.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+                <HBox alignment="CENTER" prefHeight="42.0" prefWidth="418.0" spacing="5.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="199.0" text="Do you not have an account?" />
+                        <Hyperlink fx:id="hlSignIn" text="Sign In" textFill="#ffad0f" />
+                    </children>
+                    <padding>
+                        <Insets top="30.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>

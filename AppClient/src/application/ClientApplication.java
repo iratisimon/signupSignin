@@ -6,28 +6,38 @@
  */
 package application;
 
-import javafx.application.Application;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import userInterfaceTier.controllers.SignInController;
 
 /**
  *
  * @author 2dam
  */
-public class ClientApplication extends Application {
-    
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/userInterfaceTier/view/SignInView.fxml"));
+public class ClientApplication extends javafx.application.Application {
 
+    public ClientApplication() {
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
         
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.setTitle("Sign In");
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/SignInView.fxml"));
+            Parent root = (Parent) loader.load();
+
+            SignInController controller = ((SignInController)loader.getController());
+
+            controller.setStage(stage);
+
+            controller.initStage(root);
+       } catch (IOException ex) {
+            Logger.getLogger(ClientApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -36,5 +46,5 @@ public class ClientApplication extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

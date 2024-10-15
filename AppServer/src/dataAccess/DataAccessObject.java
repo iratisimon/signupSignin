@@ -12,15 +12,15 @@ import logicalModel.model.User;
  *
  * @author 2dam
  */
-public class DataAccessObjetc implements Signable{ 
+public class DataAccessObject implements Signable{ 
 
     @Override
-    public User signIn() {
+    public User signIn(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User signUp() {
+    public User signUp(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
