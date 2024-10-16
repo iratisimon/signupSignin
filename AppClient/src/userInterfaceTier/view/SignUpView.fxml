@@ -229,11 +229,12 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Button fx:id="btnSignUp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="34.0" prefWidth="82.0" style="-fx-background-color: orange;" text="SIGN UP" textAlignment="CENTER" />
+                  <Label fx:id="labelEmpty" textFill="#fff600" />
                </children>
-            </HBox>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="28.0" prefWidth="296.0" spacing="10.0">
                <children>
                   <Label prefHeight="15.0" prefWidth="224.0" text="Do you already have an account?" textFill="WHITE">
