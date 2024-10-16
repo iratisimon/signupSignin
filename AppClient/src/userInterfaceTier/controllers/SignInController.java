@@ -6,53 +6,53 @@
 package userInterfaceTier.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import logicalModel.model.User;
 
 /**
  *
  * @author 2dam
  */
 public class SignInController {
-    
+
     @FXML
     private Label label;
-    
+
     private Stage stage;
-    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         try {
-            //Se abrirá la ventana Sign Up de manera modal.
+            //Se abrirá la ventana Sign Up.
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("userInterfaceTier/view/SignUpView.fxml"));
             Parent root = (Parent) loader.load();
             SignUpController controller = (SignUpController) loader.getController();
-            //Ventana modal.
-            Stage modalStage = new Stage();
-            controller.setStage(modalStage);
+
+            Stage stage = new Stage();
+            controller.setStage(stage);
             controller.initStage(root);
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      
 
-    void setStage(Stage modalStage) {
-        this.stage = modalStage;
+    void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     void initStage(Parent root) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Sign In");
+        stage.setResizable(false);
+        stage.show();
     }
 
 }

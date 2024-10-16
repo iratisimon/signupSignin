@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Controller class for the SignUp view in the user interface tier.
+ * It handles user interactions for the sign-up process, validates input fields,
+ * and registers new users with the system. It also includes navigation
+ * to the SignIn view.
+ *
  */
 package userInterfaceTier.controllers;
 
@@ -20,8 +22,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -34,110 +38,220 @@ import uiExceptions.InvalidZipException;
 import uiExceptions.TextFileEmptyException;
 
 /**
- *
- * @author 2dam
+ * @author Meylin
+ * @author Elbire
  */
 public class SignUpController {
 
     @FXML
     private AnchorPane anchorPane;
-
+    /**
+     * TextField for entering the user's full name.
+     */
     @FXML
     private TextField tfFullName;
 
+    /**
+     * Label for displaying validation errors for the full name.
+     */
     @FXML
-    private Label labelFullName;
+    private Label labelErrorFullName;
 
+    /**
+     * TextField for entering the user's email address.
+     */
     @FXML
     private TextField tfEmail;
 
+    /**
+     * Label for displaying validation errors for the email.
+     */
     @FXML
-    private Label labelEmail;
+    private Label labelErrorEmail;
 
+    /**
+     * PasswordField for entering the user's password.
+     */
     @FXML
-    private TextField pfPassword;
+    private PasswordField pfHiddenPassword;
 
+    /**
+     * TextField for entering the user's password.
+     */
     @FXML
-    private Label labelPasswd;
+    private TextField tfShowPassword;
 
+    /**
+     * PasswordField for confirming the user's password.
+     */
     @FXML
-    private TextField pfConfirmPassword;
+    private PasswordField pfHiddenConfirmPassword;
 
+    /**
+     * TextField for confirming the user's password.
+     */
     @FXML
-    private Label labelRepeatPasswd;
+    private TextField tfShowConfirmPassword;
 
+    /**
+     * Label for displaying validation errors for the password confirmation.
+     */
+    @FXML
+    private Label labelErrorConfirmPasswd;
+
+    /**
+     * TextField for entering the user's street address.
+     */
     @FXML
     private TextField tfStreet;
 
+    /**
+     * Label for displaying validation errors for the street address.
+     */
     @FXML
-    private Label labelStreet;
+    private Label labelErrorStreet;
 
+    /**
+     * TextField for entering the user's ZIP code.
+     */
     @FXML
     private TextField tfZip;
 
+    /**
+     * Label for displaying validation errors for the ZIP code.
+     */
     @FXML
-    private Label labelZip;
+    private Label labelErrorZip;
 
+    /**
+     * TextField for entering the user's city.
+     */
     @FXML
     private TextField tfCity;
 
+    /**
+     * Label for displaying validation errors for the city.
+     */
     @FXML
-    private Label labelCity;
+    private Label labelErrorCity;
 
+    /**
+     * TextField for entering the user's mobile phone number.
+     */
     @FXML
     private TextField tfMobile;
 
+    /**
+     * Label for displaying validation errors for the mobile phone number.
+     */
     @FXML
-    private Label labelMobile;
+    private Label labelErrorMobile;
 
+    /**
+     * Label for displaying a general error message when the form is incomplete.
+     */
     @FXML
-    private Label labelEmpty;
+    private Label labelErrorPFEmpty;
 
+    /**
+     * CheckBox for marking whether the user is active or not.
+     */
     @FXML
     private CheckBox cbActive;
 
+    /**
+     * Button to trigger the sign-up process.
+     */
     @FXML
     private Button btnSignUp;
 
+    /**
+     * Hyperlink to navigate to the SignIn view.
+     */
     @FXML
-    private Hyperlink hpSignIn;
+    private Hyperlink hypSignUp;
 
+    /**
+     * ImageView to show a tooltip for full name input.
+     */
     @FXML
     private ImageView imgFullName;
 
+    /**
+     * ImageView to show a tooltip for email input.
+     */
     @FXML
     private ImageView imgEmail;
 
+    /**
+     * ImageView to show a tooltip for password input.
+     */
     @FXML
     private ImageView imgPassword;
 
+    /**
+     * ImageView to show a tooltip for password confirmation input.
+     */
     @FXML
     private ImageView imgRepeatPassword;
 
+    /**
+     * ImageView to show a tooltip for street address input.
+     */
     @FXML
     private ImageView imgStreet;
 
+    /**
+     * ImageView to show a tooltip for ZIP code input.
+     */
     @FXML
     private ImageView imgZip;
 
+    /**
+     * ImageView to show a tooltip for city input.
+     */
     @FXML
     private ImageView imgCity;
 
+    /**
+     * ImageView to show a tooltip for mobile phone input.
+     */
     @FXML
     private ImageView imgMobile;
 
+    /**
+     * The stage for displaying the SignUp view.
+     */
     private Stage stage;
+
+    /**
+     * Interface for the sign-up business logic.
+     */
     private Signable signable;
 
     public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("SignUp");
+        Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
+        stage.getIcons().add(icon);
         stage.setResizable(false);
         tfFullName.isFocused();
-        clearForm();
+        //clearForm();
         btnSignUp.setDefaultButton(true);
+        setTooltips();
+        btnSignUp.setOnAction(this::handleSignUp);
+        hypSignUp.setOnAction(this::handleHyperLinkSignIn);
+        signable = ClientFactory.getSignable();
+        stage.show();
 
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void setTooltips() {
         Tooltip tooltipFN = new Tooltip("Enter your full name");
         Tooltip.install(imgFullName, tooltipFN);
         Tooltip tooltipE = new Tooltip("Enter your email address");
@@ -154,27 +268,17 @@ public class SignUpController {
         Tooltip.install(imgCity, tooltipC);
         Tooltip tooltipM = new Tooltip("Enter your phone number");
         Tooltip.install(imgMobile, tooltipM);
-
-        btnSignUp.setOnAction(this::handleSignUp);
-        hpSignIn.setOnAction(this::handleHyperLinkSignIn);
-        signable = ClientFactory.getSignable();
-        stage.showAndWait();
-
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     @FXML
     private void handleHyperLinkSignIn(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("userInterfaceTier/view/SignInView.fxml"));
-            Parent root = (Parent) loader.load();
-            SignInController controller = (SignInController) loader.getController();
-            Stage modalStage = new Stage();
-            //controller.setStage(modalStage);
-            //controller.initStage(root);
+            Parent root = loader.load();
+            SignInController controller = loader.getController();
+            Stage stage = new Stage();
+            controller.setStage(stage);
+            controller.initStage(root);
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -182,21 +286,21 @@ public class SignUpController {
 
     @FXML
     private void handleSignUp(ActionEvent event) {
-        //setMnemonicParsing
-        User user = null;
+        clearErrorLabels(); // Limpiar mensajes de error
+
+        User newUser = null;
         String name, street, city, password = null, email = null;
         int zip = 0, mobile = 0;
         boolean isValid = true;
 
-        isValid &= validateEmptyField(tfFullName, labelFullName, "Full name is required");
-        isValid &= validateEmptyField(tfEmail, labelEmail, "Email is required");
-        isValid &= validateEmptyField(pfPassword, labelPasswd, "Password is required");
-        isValid &= validateEmptyField(pfConfirmPassword, labelRepeatPasswd, "Confirm password is required");
-        isValid &= validateEmptyField(tfStreet, labelStreet, "Street is required");
-        isValid &= validateEmptyField(tfCity, labelCity, "City is required");
-        isValid &= validateEmptyField(tfZip, labelZip, "ZIP code is required");
-        isValid &= validateEmptyField(tfMobile, labelMobile, "Mobile number is required");
-
+        /*isValid &= validateEmptyField(tfFullName, labelErrorFullName, "Full name is required");
+        isValid &= validateEmptyField(tfEmail, labelErrorEmail, "Email is required");
+        isValid &= validateEmptyField(pfHiddenConfirmPassword, labelErrorConfirmPasswd, "Confirm password is required");
+        isValid &= validateEmptyField(tfStreet, labelErrorStreet, "Street is required");
+        isValid &= validateEmptyField(tfCity, labelErrorCity, "City is required");
+        isValid &= validateEmptyField(tfZip, labelErrorZip, "ZIP code is required");
+        isValid &= validateEmptyField(tfMobile, labelErrorMobile, "Mobile number is required");
+         */
         try {
             if (!isValid) {
                 throw new TextFileEmptyException("You must fill all the parameters");
@@ -207,13 +311,13 @@ public class SignUpController {
             //
             boolean active = cbActive.selectedProperty().getValue();
             try {
-                if (!pfPassword.getText().equalsIgnoreCase(pfConfirmPassword.getText())) {
+                if (!pfHiddenPassword.getText().equalsIgnoreCase(pfHiddenConfirmPassword.getText())) {
                     throw new InvalidConfirmPassword("The password doesnt match");
                 } else {
-                    password = pfPassword.getText();
+                    password = pfHiddenPassword.getText();
                 }
             } catch (InvalidConfirmPassword e) {
-                labelRepeatPasswd.setText(e.getMessage());
+                labelErrorConfirmPasswd.setText(e.getMessage());
             }
 
             try {
@@ -223,7 +327,7 @@ public class SignUpController {
                     email = tfEmail.getText();
                 }
             } catch (InvalidEmailException e) {
-                labelEmail.setText(e.getMessage());
+                labelErrorEmail.setText(e.getMessage());
             }
             try {
                 if (!Pattern.matches("\\d{9}$", tfMobile.getText())) {
@@ -232,7 +336,7 @@ public class SignUpController {
                     mobile = Integer.parseInt(tfMobile.getText());
                 }
             } catch (InvalidMobileException e) {
-                labelMobile.setText(e.getMessage());
+                labelErrorMobile.setText(e.getMessage());
             }
             try {
                 if (!Pattern.matches("\\d{5}$", tfZip.getText())) {
@@ -241,13 +345,13 @@ public class SignUpController {
                     zip = Integer.parseInt(tfZip.getText());
                 }
             } catch (InvalidZipException e) {
-                labelZip.setText(e.getMessage());
+                labelErrorZip.setText(e.getMessage());
             }
-            User newUser = new User(email, password, name, street, mobile, city, zip, active);
+            newUser = new User(email, password, name, street, mobile, city, zip, active);
 
             //User newUserValidate = ClientFactory.getSignable().signUp(newUser);
         } catch (TextFileEmptyException e) {
-            labelEmpty.setText(e.getMessage());
+            labelErrorPFEmpty.setText(e.getMessage());
         }
 
     }
@@ -259,26 +363,36 @@ public class SignUpController {
         }
         return true;
     }
-    
-    private void clearForm() {
+
+    private void clearErrorLabels() {
+        labelErrorFullName.setText("");
+        labelErrorEmail.setText("");
+        labelErrorConfirmPasswd.setText("");
+        labelErrorStreet.setText("");
+        labelErrorZip.setText("");
+        labelErrorCity.setText("");
+        labelErrorMobile.setText("");
+        labelErrorPFEmpty.setText("");
+    }
+
+    /*private void clearForm() {
         tfFullName.clear();
         tfEmail.clear();
-        pfPassword.clear();
-        pfConfirmPassword.clear();
+        pfHiddenPassword.clear();
+        pfHiddenConfirmPassword.clear();
         tfStreet.clear();
         tfZip.clear();
         tfCity.clear();
         tfMobile.clear();
         cbActive.setSelected(false);
-        labelFullName.setText("");
-        labelEmail.setText("");
-        labelPasswd.setText("");
-        labelRepeatPasswd.setText("");
-        labelStreet.setText("");
-        labelZip.setText("");
-        labelCity.setText("");
-        labelMobile.setText("");
-        labelEmpty.setText("");
-    }
+        labelErrorFullName.setText("");
+        labelErrorEmail.setText("");
+        labelErrorConfirmPasswd.setText("");
+        labelErrorStreet.setText("");
+        labelErrorZip.setText("");
+        labelErrorCity.setText("");
+        labelErrorMobile.setText("");
+        labelErrorPFEmpty.setText("");
+    }*/
 
 }
