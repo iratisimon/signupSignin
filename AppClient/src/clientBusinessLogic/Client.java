@@ -6,6 +6,8 @@
 package clientBusinessLogic;
 
 import logicalModel.interfaces.Signable;
+import logicalModel.message.Message;
+import logicalModel.message.MessageType;
 import logicalModel.model.User;
 
 
@@ -18,6 +20,15 @@ public class Client implements Signable{
 
     @Override
     public User signIn(User user) {
+        Message message = new Message();
+        User signedInUser = null;
+        MessageType serverMessage;
+        
+        message.setUser(user);
+        message.setMessage(MessageType.SIGN_IN_REQUEST);
+        
+        
+        
         return null;
         //aqui viene la vaina de los mensajes 
     }
