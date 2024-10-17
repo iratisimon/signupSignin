@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="userInterfaceTier.controllers.MainWindowController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="532.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterfaceTier.controllers.MainWindowController">
     <children>
-      <ImageView fitHeight="540.0" fitWidth="968.0" layoutX="14.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="533.0" fitWidth="939.0" layoutX="14.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../Downloads/Diseño_SignIn_SignUp%20(1).png" />
+            <Image url="@../../resources/images/fondo.png" />
          </image>
       </ImageView>
-      <TitledPane animated="false" expanded="false" layoutX="81.0" layoutY="21.0" prefHeight="103.0" prefWidth="106.0" text="Menu">
+      <TitledPane fx:id="tpMenu" animated="false" expanded="false" layoutX="74.0" layoutY="20.0" prefHeight="98.0" prefWidth="69.0" text="Menu">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="59.0" prefWidth="200.0">
+          <AnchorPane fx:id="anchorPane2" minHeight="0.0" minWidth="0.0" prefHeight="69.0" prefWidth="94.0">
                <children>
                   <Button fx:id="btnLogOut" layoutY="-2.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #ffb951;" text="Log Out" />
                   <Button fx:id="btnExit" layoutY="37.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="69.0" style="-fx-background-color: #ffb951;" text="Exit" />
@@ -29,28 +29,28 @@
       </TitledPane>
       <VBox layoutX="315.0" layoutY="246.0" prefHeight="200.0" prefWidth="466.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="110.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblFullName" text="Full Name" textFill="#ffb951" />
-                  <TextField fx:id="tfFullName" editable="false" prefHeight="26.0" prefWidth="152.0" style="-fx-background-color: white;" />
+                  <Label fx:id="lblFullName" prefHeight="15.0" prefWidth="171.0" text="Full Name" textFill="#ffb951" />
+                  <TextField fx:id="tfFullName" editable="false" prefHeight="26.0" prefWidth="169.0" style="-fx-background-color: white;" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="495.0" spacing="137.0">
+            <HBox prefHeight="100.0" prefWidth="495.0">
                <children>
-                  <Label fx:id="lblEmail" text="Email" textFill="#ffb752" />
-                  <TextField fx:id="tfEmail" editable="false" style="-fx-background-color: white;" />
+                  <Label fx:id="lblEmail" prefHeight="28.0" prefWidth="171.0" text="Email" textFill="#ffb752" />
+                  <TextField fx:id="tfEmail" editable="false" prefHeight="26.0" prefWidth="168.0" style="-fx-background-color: white;" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="128.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblMobile" text="Mobile" textFill="#ffb752" />
-                  <TextField fx:id="tfMobile" editable="false" style="-fx-background-color: white;" />
+                  <Label fx:id="lblMobile" prefHeight="28.0" prefWidth="171.0" text="Mobile" textFill="#ffb752" />
+                  <TextField fx:id="tfMobile" editable="false" prefHeight="26.0" prefWidth="168.0" style="-fx-background-color: white;" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="93.0">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="lblActive" text="The user is..." textFill="#ffb951" />
-                  <TextField fx:id="tfActive" editable="false" style="-fx-background-color: white;" />
+                  <Label fx:id="lblActive" prefHeight="28.0" prefWidth="171.0" text="The user is..." textFill="#ffb951" />
+                  <TextField fx:id="tfActive" editable="false" prefHeight="26.0" prefWidth="168.0" style="-fx-background-color: white;" />
                </children>
             </HBox>
          </children>

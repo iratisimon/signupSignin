@@ -5,32 +5,56 @@
  */
 package userInterfaceTier.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import logicalModel.model.User;
+import javafx.stage.Stage;
+//import logicalModel.model.User;
 
 /**
  *
  * @author 2dam
  */
-public class SignInController implements Initializable {
+public class SignInController {
     
     @FXML
     private Label label;
     
+    private Stage stage;
+    
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+          try {
+            //Se abrirá la ventana Sign Up.
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("userInterfaceTier/view/MainWindowView.fxml"));
+            Parent root = (Parent) loader.load();
+            MainWindowController controller = (MainWindowController) loader.getController();
+
+            Stage stage = new Stage();
+            controller.setStage(stage);
+            controller.initStage(root);
+        } catch (IOException ex) {
+            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+      void setStage(Stage stage) {
+        this.stage = stage;
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    void initStage(Parent root) {
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("Sign In");
+        stage.setResizable(false);
+        stage.show();
+    }
 
+   
+   
 }

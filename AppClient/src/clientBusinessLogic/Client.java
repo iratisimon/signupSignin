@@ -8,21 +8,19 @@ package clientBusinessLogic;
 import logicalModel.interfaces.Signable;
 import logicalModel.model.User;
 
-
 /**
  *
- * @author 2dam
- * Implementa la interfaz
+ * @author 2dam Implementa la interfaz
  */
-public class Client implements Signable{
+public class Client implements Signable {
 
     @Override
-    public User signIn() {
+    public User signIn(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public User signUp() {
+    public User signUp(User user) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -36,6 +34,4 @@ public class Client implements Signable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
 }
