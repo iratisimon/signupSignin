@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userInterfaceTier.controllers;
+package uiExceptions;
 
 /**
  *
@@ -17,7 +17,7 @@ public class TextEmptyException extends Exception{
     // Método para validar que el campo no esté vacío
     public static void validateNotEmpty(String field, String fieldName) throws TextEmptyException {
         if (field == null || field.trim().isEmpty()) {
-            throw new TextEmptyException(fieldName + " no puede estar vacío.");
+            throw new TextEmptyException("The fields cannot be empty.");
         }
     }
 }

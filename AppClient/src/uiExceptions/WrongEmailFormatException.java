@@ -17,7 +17,7 @@ public class WrongEmailFormatException extends Exception {
 
     public static void validateEmail(String email) throws WrongEmailFormatException {
         if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-            throw new WrongEmailFormatException("El formato del email es incorrecto.");
+            throw new WrongEmailFormatException("The email format is incorrect.");
         }
     }
 }

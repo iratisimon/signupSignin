@@ -18,7 +18,8 @@ public class Client implements Signable{
 
     @Override
     public User signIn(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
+        //aqui viene la vaina de los mensajes 
     }
 
     @Override
