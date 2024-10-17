@@ -9,7 +9,7 @@ import logicalModel.interfaces.Signable;
 
 /**
  *
- * @author 2dam
+ * @author Elbire and Irati 
  */
 public class ClientFactory {
     public static Signable getSignable(){

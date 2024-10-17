@@ -11,7 +11,7 @@ import logicalModel.model.User;
 
 /**
  *
- * @author 2dam
+ * @author Olaia, Meylin, Elbire and Irati
  * Implementa la interfaz
  */
 public class Client implements Signable{

@@ -29,11 +29,20 @@ import logicalModel.model.User;
 import uiExceptions.WrongEmailFormatException;
 
 /**
- *
- * @author 2dam
+ * The SignInController class manages the sign-in functionality of the application.
+ * It handles user input for email and password, validates the input, and manages
+ * the visibility of password fields. It also controls the navigation to other
+ * application views.
+ * 
+ * This class utilizes JavaFX for the user interface and includes methods
+ * to handle button actions, password visibility, and transitions between views.
+ * 
+ * @author Irati
  */
 public class SignInController {
-
+    /**
+     * Constructs a new SignInController instance.
+     */
     public SignInController() {
     }
 
@@ -65,14 +74,29 @@ public class SignInController {
 
     private Stage stage;
 
+     /**
+     * Sets the stage for this controller.
+     * 
+     * @param stage the stage to be set.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
+    
+    /**
+     * Returns the current stage of the controller.
+     * 
+     * @return the current stage.
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Initializes the stage with the specified root node.
+     * 
+     * @param root the root node for the scene.
+     */
     public void initStage(Parent root) {
         try {
             logger.info("Initializizng Sign In stage");
@@ -102,6 +126,13 @@ public class SignInController {
         }
     }
 
+    /**
+     * Updates the visibility of the password fields based on user interaction.
+     * 
+     * @param observable the observable value.
+     * @param oldValue the old value of the password field.
+     * @param newValue the new value of the password field.
+     */
     public void passwrdIsVisible(ObservableValue observable, String oldValue, String newValue) {
         
         if (pfPasswrd.isVisible()) {
@@ -112,6 +143,11 @@ public class SignInController {
         }
     }
 
+     /**
+     * Handles the action of the eye icon toggle button.
+     * 
+     * @param event the action event triggered by the button.
+     */
     @FXML
     public void handelEyeIconToggleButtonAction(ActionEvent event) {
         if (tgbtnEyeIcon.isSelected()) {
@@ -127,6 +163,15 @@ public class SignInController {
         }
     }
 
+    /**
+     * Handles the action of the accept button.
+     * Validates email and password input, then attempts to sign in the user.
+     * 
+     * @param event the action event triggered by the button.
+     * @throws WrongEmailFormatException if the email format is incorrect.
+     * @throws IOException if an input or output exception occurs.
+     * @throws TextEmptyException if any input field is empty.
+     */
     @FXML
     private void handleButtonAction(ActionEvent event) throws WrongEmailFormatException, IOException, TextEmptyException {
         String email = this.emailText.getText().trim();
@@ -159,6 +204,12 @@ public class SignInController {
         }
     }
 
+    /**
+     * Handles the action of the sign-up hyperlink.
+     * Navigates to the sign-up view.
+     * 
+     * @param event the action event triggered by the hyperlink.
+     */
     @FXML
     private void handelSignUpHyperlink(ActionEvent event) {
         try {
