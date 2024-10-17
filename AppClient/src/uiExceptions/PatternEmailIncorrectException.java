@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logicalExceptions;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public class Exceptions extends Exception {
-    
+public class PatternEmailIncorrectException extends Exception{
+    public PatternEmailIncorrectException(String message) {
+        super(message);
+    }
 }

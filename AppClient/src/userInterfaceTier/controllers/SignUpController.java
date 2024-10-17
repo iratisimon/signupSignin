@@ -28,14 +28,19 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import logicalModel.interfaces.Signable;
 import logicalModel.model.User;
-import uiExceptions.InvalidConfirmPassword;
-import uiExceptions.InvalidEmailException;
-import uiExceptions.InvalidMobileException;
-import uiExceptions.InvalidZipException;
-import uiExceptions.TextFileEmptyException;
+import uiExceptions.MaxCityCharacterException;
+import uiExceptions.MaxStreetCharacterException;
+import uiExceptions.PasswdsDontMatchException;
+import uiExceptions.PatternEmailIncorrectException;
+import uiExceptions.PatternFullNameIncorrectException;
+import uiExceptions.PatternMobileIncorrectException;
+import uiExceptions.PatternZipIncorrectException;
+import uiExceptions.TextEmptyException;
 
 /**
  * @author Meylin
@@ -151,13 +156,13 @@ public class SignUpController {
      * Label for displaying a general error message when the form is incomplete.
      */
     @FXML
-    private Label labelErrorPFEmpty;
+    private Label labelErrorEmpty;
 
     /**
      * CheckBox for marking whether the user is active or not.
      */
     @FXML
-    private CheckBox cbActive;
+    private CheckBox cbxStatus;
 
     /**
      * Button to trigger the sign-up process.
@@ -231,19 +236,21 @@ public class SignUpController {
 
     public void initStage(Parent root) {
         Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setTitle("SignUp");
         Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
         stage.getIcons().add(icon);
         stage.setResizable(false);
         tfFullName.isFocused();
-        //clearForm();
+        clearForm();
+        clearErrorLabels();
         btnSignUp.setDefaultButton(true);
         setTooltips();
         btnSignUp.setOnAction(this::handleSignUp);
         hypSignUp.setOnAction(this::handleHyperLinkSignIn);
         signable = ClientFactory.getSignable();
-        stage.show();
+        stage.showAndWait();
 
     }
 
@@ -276,9 +283,7 @@ public class SignUpController {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("userInterfaceTier/view/SignInView.fxml"));
             Parent root = loader.load();
             SignInController controller = loader.getController();
-            Stage stage = new Stage();
-            controller.setStage(stage);
-            controller.initStage(root);
+            this.stage.close();
         } catch (IOException ex) {
             Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -289,79 +294,102 @@ public class SignUpController {
         clearErrorLabels(); // Limpiar mensajes de error
 
         User newUser = null;
-        String name, street, city, password = null, email = null;
+        String name = null, street = null, city = null, password = null, email = null;
         int zip = 0, mobile = 0;
         boolean isValid = true;
 
-        /*isValid &= validateEmptyField(tfFullName, labelErrorFullName, "Full name is required");
-        isValid &= validateEmptyField(tfEmail, labelErrorEmail, "Email is required");
-        isValid &= validateEmptyField(pfHiddenConfirmPassword, labelErrorConfirmPasswd, "Confirm password is required");
-        isValid &= validateEmptyField(tfStreet, labelErrorStreet, "Street is required");
-        isValid &= validateEmptyField(tfCity, labelErrorCity, "City is required");
-        isValid &= validateEmptyField(tfZip, labelErrorZip, "ZIP code is required");
-        isValid &= validateEmptyField(tfMobile, labelErrorMobile, "Mobile number is required");
-         */
         try {
-            if (!isValid) {
-                throw new TextFileEmptyException("You must fill all the parameters");
+            if (tfFullName.getText().isEmpty() || tfEmail.getText().isEmpty() || pfHiddenPassword.getText().isEmpty() || pfHiddenConfirmPassword.getText().isEmpty() || tfStreet.getText().isEmpty() || tfCity.getText().isEmpty() || tfZip.getText().isEmpty() || tfMobile.getText().isEmpty()) {
+                throw new TextEmptyException("You must fill all the parameters");
             }
-            name = tfFullName.getText();
-            street = tfStreet.getText();
-            city = tfCity.getText();
-            //
-            boolean active = cbActive.selectedProperty().getValue();
+            
+            try {
+                if(!Pattern.matches("^[A-Za-zÀ-ÿ'\\s]+$", tfFullName.getText())){
+                    tfFullName.isFocused();
+                    throw new PatternFullNameIncorrectException("The full name can't contain numbers");
+                }else{
+                    name = tfFullName.getText();
+                }
+                
+            }catch(PatternFullNameIncorrectException e){
+                labelErrorFullName.setText(e.getMessage());
+            }
+            
+            try {
+                if ((!Pattern.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", tfEmail.getText()))|| tfEmail.getText().length() > 320) {
+                    tfEmail.isFocused();
+                    throw new PatternEmailIncorrectException("The email must have a valid format");
+                } else {
+                    email = tfEmail.getText();
+                }
+            } catch (PatternEmailIncorrectException e) {
+                labelErrorEmail.setText(e.getMessage());
+            }
+            
             try {
                 if (!pfHiddenPassword.getText().equalsIgnoreCase(pfHiddenConfirmPassword.getText())) {
-                    throw new InvalidConfirmPassword("The password doesnt match");
+                    pfHiddenPassword.isFocused();
+                    throw new PasswdsDontMatchException("The password doesnt match");
                 } else {
                     password = pfHiddenPassword.getText();
                 }
-            } catch (InvalidConfirmPassword e) {
+            } catch (PasswdsDontMatchException e) {
                 labelErrorConfirmPasswd.setText(e.getMessage());
             }
 
             try {
-                if (!Pattern.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", tfEmail.getText())) {
-                    throw new InvalidEmailException("The email must have a valid format");
-                } else {
-                    email = tfEmail.getText();
+                if(tfStreet.getText().length() > 255){
+                    tfStreet.isFocused();
+                    throw new MaxStreetCharacterException("The street must be shorter");
+                }else{
+                    street = tfStreet.getText();
                 }
-            } catch (InvalidEmailException e) {
-                labelErrorEmail.setText(e.getMessage());
+            }catch(MaxStreetCharacterException e){
+                labelErrorStreet.setText(e.getMessage());
             }
-            try {
-                if (!Pattern.matches("\\d{9}$", tfMobile.getText())) {
-                    throw new InvalidMobileException("Phone number must have 9 numeric numbers");
-                } else {
-                    mobile = Integer.parseInt(tfMobile.getText());
-                }
-            } catch (InvalidMobileException e) {
-                labelErrorMobile.setText(e.getMessage());
-            }
+            
             try {
                 if (!Pattern.matches("\\d{5}$", tfZip.getText())) {
-                    throw new InvalidZipException("Zip code must have 5 numeric numbers");
+                    tfZip.isFocused();
+                    throw new PatternZipIncorrectException("Zip code must have 5 numeric numbers");
                 } else {
                     zip = Integer.parseInt(tfZip.getText());
                 }
-            } catch (InvalidZipException e) {
+            } catch (PatternZipIncorrectException e) {
                 labelErrorZip.setText(e.getMessage());
             }
+            
+            try {
+                if(tfCity.getText().length() > 58){
+                    tfCity.isFocused();
+                    throw new MaxCityCharacterException("The street must be shorter");
+                }else{
+                    city = tfCity.getText();
+                }
+            }catch(MaxCityCharacterException e){
+                labelErrorCity.setText(e.getMessage());
+            }
+            
+            try {
+                if (!Pattern.matches("\\d{9}$", tfMobile.getText())) {
+                    tfMobile.isFocused();
+                    throw new PatternMobileIncorrectException("Phone number must have 9 numeric numbers");
+                } else {
+                    mobile = Integer.parseInt(tfMobile.getText());
+                }
+            } catch (PatternMobileIncorrectException e) {
+                labelErrorMobile.setText(e.getMessage());
+            }
+            
+            boolean active = cbxStatus.selectedProperty().getValue();
+            
             newUser = new User(email, password, name, street, mobile, city, zip, active);
 
             //User newUserValidate = ClientFactory.getSignable().signUp(newUser);
-        } catch (TextFileEmptyException e) {
-            labelErrorPFEmpty.setText(e.getMessage());
+        } catch (TextEmptyException e) {
+            labelErrorEmpty.setText(e.getMessage());
         }
 
-    }
-
-    private boolean validateEmptyField(TextField textField, Label label, String errorMessage) {
-        if (textField.getText().isEmpty()) {
-            label.setText(errorMessage);
-            return false;
-        }
-        return true;
     }
 
     private void clearErrorLabels() {
@@ -372,10 +400,10 @@ public class SignUpController {
         labelErrorZip.setText("");
         labelErrorCity.setText("");
         labelErrorMobile.setText("");
-        labelErrorPFEmpty.setText("");
+        labelErrorEmpty.setText("");
     }
 
-    /*private void clearForm() {
+    private void clearForm() {
         tfFullName.clear();
         tfEmail.clear();
         pfHiddenPassword.clear();
@@ -384,15 +412,7 @@ public class SignUpController {
         tfZip.clear();
         tfCity.clear();
         tfMobile.clear();
-        cbActive.setSelected(false);
-        labelErrorFullName.setText("");
-        labelErrorEmail.setText("");
-        labelErrorConfirmPasswd.setText("");
-        labelErrorStreet.setText("");
-        labelErrorZip.setText("");
-        labelErrorCity.setText("");
-        labelErrorMobile.setText("");
-        labelErrorPFEmpty.setText("");
-    }*/
+        cbxStatus.setSelected(false);
+    }
 
 }

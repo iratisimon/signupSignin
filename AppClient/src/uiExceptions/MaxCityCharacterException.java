@@ -3,19 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package application;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public class ServerApplication {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class MaxCityCharacterException extends Exception{
+    public MaxCityCharacterException(String message) {
+        super(message);
     }
-    
 }

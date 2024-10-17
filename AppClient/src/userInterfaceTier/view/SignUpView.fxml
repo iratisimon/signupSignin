@@ -5,8 +5,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,7 +23,7 @@
       </ImageView>
       <VBox layoutX="398.0" layoutY="16.0" prefHeight="510.0" prefWidth="545.0" spacing="7.0">
          <children>
-            <VBox prefHeight="50.0" prefWidth="263.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="263.0">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -54,7 +54,7 @@
                   <Insets />
                </VBox.margin>
             </VBox>
-            <VBox prefHeight="50.0" prefWidth="263.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="263.0">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -85,7 +85,7 @@
                      </VBox.margin></Label>
                </children>
             </VBox>
-            <VBox prefHeight="50.0" prefWidth="263.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="263.0">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -105,7 +105,7 @@
                            <HBox.margin>
                               <Insets />
                            </HBox.margin></PasswordField>
-                        <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView accessibleRole="TOGGLE_BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
                            </image>
@@ -117,7 +117,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox prefHeight="50.0" prefWidth="263.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="263.0">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="423.0">
                      <children>
@@ -134,7 +134,7 @@
                               <Image url="@../../resources/images/cerrar.jpg" />
                            </image></ImageView>
                         <PasswordField fx:id="pfHiddenConfirmPassword" accessibleRole="PASSWORD_FIELD" prefHeight="25.0" prefWidth="321.0" text="Repeat Password" />
-                        <ImageView accessibleRole="BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView accessibleRole="TOGGLE_BUTTON" fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../resources/images/ShowPasswdOrange.png" />
                            </image>
@@ -144,7 +144,7 @@
                   <Label fx:id="labelErrorConfirmPasswd" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
                </children>
             </VBox>
-            <VBox prefHeight="50.0" prefWidth="263.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="263.0">
                <children>
                   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -164,7 +164,7 @@
                         <TextField fx:id="tfStreet" prefHeight="25.0" prefWidth="356.0" text="Street" />
                      </children>
                   </HBox>
-                  <Label fx:id="labelStreet" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
+                  <Label fx:id="labelErrorStreet" prefHeight="17.0" prefWidth="265.0" textFill="#fff600" />
                </children>
             </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="342.0">
@@ -188,7 +188,7 @@
                               <TextField fx:id="tfZip" prefHeight="25.0" prefWidth="133.0" text="Postal Code" />
                            </children>
                         </HBox>
-                        <Label fx:id="labelZip" textFill="#fff600" />
+                        <Label fx:id="labelErrorZip" textFill="#fff600" />
                      </children>
                   </VBox>
                   <VBox prefHeight="42.0" prefWidth="196.0">
@@ -210,12 +210,12 @@
                               <TextField fx:id="tfCity" prefHeight="25.0" prefWidth="133.0" text="City" />
                            </children>
                         </HBox>
-                        <Label fx:id="labelCity" textFill="#fff600" />
+                        <Label fx:id="labelErrorCity" textFill="#fff600" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox prefHeight="52.0" prefWidth="340.0">
+            <HBox alignment="CENTER_RIGHT" prefHeight="52.0" prefWidth="340.0">
                <children>
                   <VBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="455.0">
                      <children>
@@ -236,17 +236,17 @@
                               <TextField fx:id="tfMobile" prefHeight="25.0" prefWidth="133.0" text="Phone Number" />
                            </children>
                         </HBox>
-                        <Label fx:id="labelMobile" textFill="#fff600" />
+                        <Label fx:id="labelErrorMobile" textFill="#fff600" />
                      </children>
                   </VBox>
-                  <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="306.0">
+                  <HBox alignment="CENTER" prefHeight="42.0" prefWidth="306.0">
                      <children>
                         <Label contentDisplay="BOTTOM" prefHeight="52.0" prefWidth="140.0" text="CHECK IF YOU&#10;ARE ACTIVE" textAlignment="CENTER" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Algerian" size="16.0" />
                            </font>
                         </Label>
-                        <CheckBox fx:id="cbActive" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="47.0" style="-fx-background-color: white; -fx-background-radius: 2;">
+                        <CheckBox fx:id="cbxStatus" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="47.0" style="-fx-background-color: white; -fx-background-radius: 2;">
                            <padding>
                               <Insets left="15.0" />
                            </padding>
@@ -264,7 +264,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <Label fx:id="labelEmpty" textFill="#fff600" />
+                  <Label fx:id="labelErrorEmpty" textFill="#fff600" />
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="28.0" prefWidth="296.0">

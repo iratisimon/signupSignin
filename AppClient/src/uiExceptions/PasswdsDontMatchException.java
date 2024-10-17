@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dataAccess;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public class PoolConnections {
-    
+public class PasswdsDontMatchException extends Exception{
+    public PasswdsDontMatchException(String message) {
+        super(message);
+    }
 }

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serverBusinessLogic.sockets;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public class ServerSocket {
-    
+public class PatternMobileIncorrectException extends Exception{
+    public PatternMobileIncorrectException(String message) {
+        super(message);
+    }
 }

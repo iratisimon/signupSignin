@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serverBusinessLogic.threads;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public class Worker extends Thread {
-    
+public class TextEmptyException extends Exception{
+    public TextEmptyException(String message) {
+        super(message);
+    }
 }

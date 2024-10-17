@@ -9,8 +9,8 @@ package uiExceptions;
  *
  * @author 2dam
  */
-public class TextFileEmptyException extends Exception{
-    public TextFileEmptyException(String message) {
+public class PatternFullNameIncorrectException extends Exception{
+    public PatternFullNameIncorrectException(String message) {
         super(message);
     }
 }

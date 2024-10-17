@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serverBusinessLogic.interfaces;
+package uiExceptions;
 
 /**
  *
  * @author 2dam
  */
-public interface Closable {
-    
+public class PatternZipIncorrectException extends Exception{
+
+    public PatternZipIncorrectException(String message) {
+        super(message);
+    }
 }

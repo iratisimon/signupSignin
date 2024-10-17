@@ -9,9 +9,8 @@ package uiExceptions;
  *
  * @author 2dam
  */
-public class InvalidZipException extends Exception{
-
-    public InvalidZipException(String message) {
+public class MaxStreetCharacterException extends Exception{
+    public MaxStreetCharacterException(String message) {
         super(message);
     }
 }
