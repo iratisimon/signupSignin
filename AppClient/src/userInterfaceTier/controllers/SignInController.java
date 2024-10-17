@@ -104,6 +104,9 @@ public class SignInController {
             stage.setScene(scene);
             stage.setTitle("Sign In");
             stage.setResizable(false);
+          
+            Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
+            stage.getIcons().add(icon);
 
             emailText.isFocused();
             ivEyeIcon.setImage(new Image("/resources/images/ShowPasswd.png"));

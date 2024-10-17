@@ -10,13 +10,13 @@ import logicalModel.message.Message;
 import logicalModel.message.MessageType;
 import logicalModel.model.User;
 
-
 /**
  *
+
  * @author Olaia, Meylin, Elbire and Irati
  * Implementa la interfaz
  */
-public class Client implements Signable{
+public class Client implements Signable {
 
     @Override
     public User signIn(User user) {
@@ -48,6 +48,4 @@ public class Client implements Signable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
 }

@@ -5,24 +5,99 @@
  */
 package userInterfaceTier.controllers;
 
+import clientBusinessLogic.ClientFactory;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import logicalModel.interfaces.Signable;
 
 /**
  *
  * @author 2dam
  */
 public class MainWindowController {
- 
+
     @FXML
-    private Label label;
-    
+    private AnchorPane anchorPane;
+
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private TitledPane tpMenu;
+
+    @FXML
+    private AnchorPane anchorPane2;
+
+    @FXML
+    private Button btnLogOut;
+
+    @FXML
+    private Button btnExit;
+
+    @FXML
+    private TextField tfFullName;
+
+    @FXML
+    private Label lblFullName;
+
+    @FXML
+    private TextField tfEmail;
+
+    @FXML
+    private Label lblEmail;
+
+    @FXML
+    private TextField tfMobile;
+
+    @FXML
+    private Label lblMobile;
+
+    @FXML
+    private TextField tfActive;
+
+    @FXML
+    private Label lblActive;
+
+    private Stage stage;
+
+    private Signable signable;
+
+    public void initStage(Parent root) {
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.setTitle("MainWindow");
+        Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
+        tfFullName.isFocused();
+        btnExit.setOnAction(this::handleExit);
+        btnLogOut.setOnAction(this::handleLogOut);
+        stage.show();
+
     }
- 
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    private void handleExit(ActionEvent event) {
+        // Cierra la aplicación
+        Platform.exit();
+
+    }
     
+    private void handleLogOut(ActionEvent event) {
+        stage.close();
+       
+    }
+
 }
