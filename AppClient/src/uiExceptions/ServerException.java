@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clientBusinessLogic;
-
-import logicalModel.interfaces.Signable;
+package uiExceptions;
 
 /**
  *
- * @author Elbire and Irati 
+ * @author 2dam
  */
-public class ClientFactory {
-    public static Signable getSignable(){
-        return new Client();
+public class ServerException extends Exception {
+    public ServerException(String message) {
+        super(message);
     }
 }

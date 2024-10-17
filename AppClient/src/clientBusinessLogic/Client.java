@@ -6,17 +6,31 @@
 package clientBusinessLogic;
 
 import logicalModel.interfaces.Signable;
+import logicalModel.message.Message;
+import logicalModel.message.MessageType;
 import logicalModel.model.User;
 
 /**
  *
- * @author 2dam Implementa la interfaz
+
+ * @author Olaia, Meylin, Elbire and Irati
+ * Implementa la interfaz
  */
 public class Client implements Signable {
 
     @Override
     public User signIn(User user) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Message message = new Message();
+        User signedInUser = null;
+        MessageType serverMessage;
+        
+        message.setUser(user);
+        message.setMessage(MessageType.SIGN_IN_REQUEST);
+        
+        
+        
+        return null;
+        //aqui viene la vaina de los mensajes 
     }
 
     @Override
