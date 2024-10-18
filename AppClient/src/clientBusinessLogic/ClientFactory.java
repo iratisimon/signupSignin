@@ -15,4 +15,11 @@ public class ClientFactory {
     public static Signable getSignable(){
         return new Client();
     }
+    
+  /*  public static Signable getSignable() {
+        if (signable == null) {
+            signable = new SignableImplementation();
+        }
+        return signable;
+    }*/
 }

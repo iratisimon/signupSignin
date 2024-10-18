@@ -18,7 +18,13 @@ import logicalModel.model.User;
  */
 public class Client implements Signable {
 
-    @Override
+    /**
+     *
+     * @param User
+     * @return
+     * @throws IllegalArgumentException
+     */
+     @Override
     public User signIn(User user) {
         Message message = new Message();
         User signedInUser = null;
@@ -47,5 +53,7 @@ public class Client implements Signable {
     public void closeSession() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+   
 
 }

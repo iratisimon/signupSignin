@@ -1,4 +1,5 @@
 /*
+
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -20,10 +21,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logicalModel.interfaces.Signable;
+import logicalModel.model.User;
 
 /**
  *
- * @author 2dam
+ * @author Olaia
  */
 public class MainWindowController {
 
@@ -67,12 +69,12 @@ public class MainWindowController {
     private Label lblActive;
 
     private Stage stage;
+    private Stage signInStage;
+   //private Signable signable;
 
-    private Signable signable;
-
-    public void initStage(Parent root) {
+    public void initStage(Parent root, User userSignedIn) {
         Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setTitle("MainWindow");
         Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
@@ -94,10 +96,15 @@ public class MainWindowController {
         Platform.exit();
 
     }
-    
+
+    public void setSignInStage(Stage signInStage) {
+        this.signInStage = signInStage;
+    }
+
     private void handleLogOut(ActionEvent event) {
-        stage.close();
-       
+            stage.close();
+            signInStage.show();
+     
     }
 
 }

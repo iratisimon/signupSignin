@@ -29,17 +29,18 @@ import logicalModel.model.User;
 import uiExceptions.WrongEmailFormatException;
 
 /**
- * The SignInController class manages the sign-in functionality of the application.
- * It handles user input for email and password, validates the input, and manages
- * the visibility of password fields. It also controls the navigation to other
- * application views.
- * 
- * This class utilizes JavaFX for the user interface and includes methods
- * to handle button actions, password visibility, and transitions between views.
- * 
+ * The SignInController class manages the sign-in functionality of the
+ * application. It handles user input for email and password, validates the
+ * input, and manages the visibility of password fields. It also controls the
+ * navigation to other application views.
+ *
+ * This class utilizes JavaFX for the user interface and includes methods to
+ * handle button actions, password visibility, and transitions between views.
+ *
  * @author Irati
  */
 public class SignInController {
+
     /**
      * Constructs a new SignInController instance.
      */
@@ -74,18 +75,18 @@ public class SignInController {
 
     private Stage stage;
 
-     /**
+    /**
      * Sets the stage for this controller.
-     * 
+     *
      * @param stage the stage to be set.
      */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
+
     /**
      * Returns the current stage of the controller.
-     * 
+     *
      * @return the current stage.
      */
     public Stage getStage() {
@@ -94,7 +95,7 @@ public class SignInController {
 
     /**
      * Initializes the stage with the specified root node.
-     * 
+     *
      * @param root the root node for the scene.
      */
     public void initStage(Parent root) {
@@ -104,7 +105,7 @@ public class SignInController {
             stage.setScene(scene);
             stage.setTitle("Sign In");
             stage.setResizable(false);
-          
+
             Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
             stage.getIcons().add(icon);
 
@@ -131,13 +132,13 @@ public class SignInController {
 
     /**
      * Updates the visibility of the password fields based on user interaction.
-     * 
+     *
      * @param observable the observable value.
      * @param oldValue the old value of the password field.
      * @param newValue the new value of the password field.
      */
     public void passwrdIsVisible(ObservableValue observable, String oldValue, String newValue) {
-        
+
         if (pfPasswrd.isVisible()) {
             tfPasswrd.setText(pfPasswrd.getText());
 
@@ -146,9 +147,9 @@ public class SignInController {
         }
     }
 
-     /**
+    /**
      * Handles the action of the eye icon toggle button.
-     * 
+     *
      * @param event the action event triggered by the button.
      */
     @FXML
@@ -166,10 +167,14 @@ public class SignInController {
         }
     }
 
+    public void setSignInStage(Stage stage) {
+        this.stage = stage;
+    }
+
     /**
-     * Handles the action of the accept button.
-     * Validates email and password input, then attempts to sign in the user.
-     * 
+     * Handles the action of the accept button. Validates email and password
+     * input, then attempts to sign in the user.
+     *
      * @param event the action event triggered by the button.
      * @throws WrongEmailFormatException if the email format is incorrect.
      * @throws IOException if an input or output exception occurs.
@@ -186,7 +191,8 @@ public class SignInController {
             WrongEmailFormatException.validateEmail(email);
 
             User user = new User(email, passwrd);
-            User userSignedIn = ClientFactory.getSignable().signIn(user); 
+            User userSignedIn = new User("a@g.com", "abcd");
+            //ClientFactory.getSignable().signIn(user); 
 
             //Abrir ventana Main
             emailText.setText("");
@@ -195,9 +201,13 @@ public class SignInController {
             lblError.setText("");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/MainWindowView.fxml"));
             Parent root = (Parent) loader.load();
-            MainWindowController controller = ((MainWindowController) loader.getController());
-            //controller.setStage(stage);
-            //controller.initStage(root, userSignedIn);
+            MainWindowController controller = loader.getController();
+
+            Stage mainStage = new Stage();
+            controller.setStage(mainStage);
+            controller.setSignInStage(this.stage);
+            controller.initStage(root, userSignedIn);
+
         } catch (WrongEmailFormatException e) {
             lblError.setText(e.getMessage());
             logger.severe(e.getLocalizedMessage());
@@ -207,10 +217,11 @@ public class SignInController {
         }
     }
 
+    
     /**
-     * Handles the action of the sign-up hyperlink.
-     * Navigates to the sign-up view.
-     * 
+     * Handles the action of the sign-up hyperlink. Navigates to the sign-up
+     * view.
+     *
      * @param event the action event triggered by the hyperlink.
      */
     @FXML
