@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -20,13 +21,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -229,6 +234,20 @@ public class SignUpController {
      */
     private Stage stage;
 
+    @FXML
+    private ToggleButton tgbEyeConfirmPasswd;
+
+    @FXML
+    private ToggleButton tgbEyePasswd;
+
+    @FXML
+    private ImageView imgEyePasswd;
+
+    @FXML
+    private ImageView imgEyeConfirmPasswd;
+
+    @FXML
+    private ContextMenu contextMenu;
     /**
      * Interface for the sign-up business logic.
      */
@@ -243,10 +262,23 @@ public class SignUpController {
         stage.getIcons().add(icon);
         stage.setResizable(false);
         tfFullName.isFocused();
+        btnSignUp.setDefaultButton(true);
+        tfShowPassword.setVisible(false);
+        tfShowConfirmPassword.setVisible(false);
         clearForm();
         clearErrorLabels();
-        btnSignUp.setDefaultButton(true);
         setTooltips();
+        setPromptText();
+
+        pfHiddenPassword.textProperty().addListener(this::passwrdIsVisible);
+        tfShowPassword.textProperty().addListener(this::passwrdIsVisible);
+
+        pfHiddenConfirmPassword.textProperty().addListener(this::passwrdIsVisible);
+        tfShowConfirmPassword.textProperty().addListener(this::passwrdIsVisible);
+
+        tgbEyePasswd.setOnAction(this::handelEyeIconToggleButtonAction);
+        tgbEyeConfirmPasswd.setOnAction(this::handelEyeIconToggleButtonAction);
+
         btnSignUp.setOnAction(this::handleSignUp);
         hypSignUp.setOnAction(this::handleHyperLinkSignIn);
         signable = ClientFactory.getSignable();
@@ -277,6 +309,82 @@ public class SignUpController {
         Tooltip.install(imgMobile, tooltipM);
     }
 
+    private void setPromptText() {
+        tfFullName.setPromptText("Enter your full name");
+        tfEmail.setPromptText("Enter your email (ej.ejemplo@correo.com)");
+        pfHiddenPassword.setPromptText("Enter your password");
+        pfHiddenConfirmPassword.setPromptText("Repeat your password");
+        tfShowPassword.setPromptText("Enter your password");
+        tfShowConfirmPassword.setPromptText("Repeat your password");
+        tfStreet.setPromptText("Enter your street");
+        tfZip.setPromptText("Enter you ZIP (ej. 48013)");
+        tfCity.setPromptText("Enter your city");
+        tfMobile.setPromptText("Enter your mobile phone");
+
+    }
+
+    @FXML
+    public void showContextMenu(MouseEvent event) {
+        // Mostrar el menú contextual en la posición del mouse
+        contextMenu.show(contextMenu.getScene().getWindow(), event.getScreenX(), event.getScreenY());
+    }
+
+    @FXML
+    private void handleResetForm() {
+        clearForm(); // Método que ya tienes para limpiar el formulario
+        System.out.println("Formulario reseteado");
+    }
+
+    @FXML
+    private void handleAnotherOption() {
+        // Lógica para otra opción
+        System.out.println("Otra opción seleccionada");
+    }
+
+    public void passwrdIsVisible(ObservableValue observable, String oldValue, String newValue) {
+
+        if (pfHiddenPassword.isVisible()) {
+            tfShowPassword.setText(pfHiddenPassword.getText());
+        } else if (tfShowPassword.isVisible()) {
+            pfHiddenPassword.setText(tfShowPassword.getText());
+        }
+
+        if (pfHiddenConfirmPassword.isVisible()) {
+            tfShowConfirmPassword.setText(pfHiddenConfirmPassword.getText());
+
+        } else if (tfShowConfirmPassword.isVisible()) {
+            pfHiddenConfirmPassword.setText(tfShowConfirmPassword.getText());
+        }
+
+    }
+
+    @FXML
+    private void handelEyeIconToggleButtonAction(ActionEvent event) {
+
+        Image ojoTachado = new Image(getClass().getResourceAsStream("/resources/images/HidePasswdOrange.png"));
+        Image ojoNormal = new Image(getClass().getResourceAsStream("/resources/images/ShowPasswdOrange.png"));
+
+        if (tgbEyePasswd.isSelected()) {
+            pfHiddenPassword.setVisible(false);
+            tfShowPassword.setVisible(true);
+            imgEyePasswd.setImage(ojoTachado);
+        } else {
+            tfShowPassword.setVisible(false);
+            pfHiddenPassword.setVisible(true);
+            imgEyePasswd.setImage(ojoNormal);
+        }
+
+        if (tgbEyeConfirmPasswd.isSelected()) {
+            pfHiddenConfirmPassword.setVisible(false);
+            tfShowConfirmPassword.setVisible(true);
+            imgEyeConfirmPasswd.setImage(ojoTachado);
+        } else {
+            tfShowConfirmPassword.setVisible(false);
+            pfHiddenConfirmPassword.setVisible(true);
+            imgEyeConfirmPasswd.setImage(ojoNormal);
+        }
+    }
+
     @FXML
     private void handleHyperLinkSignIn(ActionEvent event) {
         try {
@@ -284,8 +392,10 @@ public class SignUpController {
             Parent root = loader.load();
             SignInController controller = loader.getController();
             this.stage.close();
+
         } catch (IOException ex) {
-            Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -302,21 +412,21 @@ public class SignUpController {
             if (tfFullName.getText().isEmpty() || tfEmail.getText().isEmpty() || pfHiddenPassword.getText().isEmpty() || pfHiddenConfirmPassword.getText().isEmpty() || tfStreet.getText().isEmpty() || tfCity.getText().isEmpty() || tfZip.getText().isEmpty() || tfMobile.getText().isEmpty()) {
                 throw new TextEmptyException("You must fill all the parameters");
             }
-            
+
             try {
-                if(!Pattern.matches("^[A-Za-zÀ-ÿ'\\s]+$", tfFullName.getText())){
+                if (!Pattern.matches("^[A-Za-zÀ-ÿ'\\s]+$", tfFullName.getText())) {
                     tfFullName.isFocused();
                     throw new PatternFullNameIncorrectException("The full name can't contain numbers");
-                }else{
+                } else {
                     name = tfFullName.getText();
                 }
-                
-            }catch(PatternFullNameIncorrectException e){
+
+            } catch (PatternFullNameIncorrectException e) {
                 labelErrorFullName.setText(e.getMessage());
             }
-            
+
             try {
-                if ((!Pattern.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", tfEmail.getText()))|| tfEmail.getText().length() > 320) {
+                if ((!Pattern.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$", tfEmail.getText())) || tfEmail.getText().length() > 320) {
                     tfEmail.isFocused();
                     throw new PatternEmailIncorrectException("The email must have a valid format");
                 } else {
@@ -325,7 +435,7 @@ public class SignUpController {
             } catch (PatternEmailIncorrectException e) {
                 labelErrorEmail.setText(e.getMessage());
             }
-            
+
             try {
                 if (!pfHiddenPassword.getText().equalsIgnoreCase(pfHiddenConfirmPassword.getText())) {
                     pfHiddenPassword.isFocused();
@@ -338,16 +448,16 @@ public class SignUpController {
             }
 
             try {
-                if(tfStreet.getText().length() > 255){
+                if (tfStreet.getText().length() > 255) {
                     tfStreet.isFocused();
                     throw new MaxStreetCharacterException("The street must be shorter");
-                }else{
+                } else {
                     street = tfStreet.getText();
                 }
-            }catch(MaxStreetCharacterException e){
+            } catch (MaxStreetCharacterException e) {
                 labelErrorStreet.setText(e.getMessage());
             }
-            
+
             try {
                 if (!Pattern.matches("\\d{5}$", tfZip.getText())) {
                     tfZip.isFocused();
@@ -358,18 +468,18 @@ public class SignUpController {
             } catch (PatternZipIncorrectException e) {
                 labelErrorZip.setText(e.getMessage());
             }
-            
+
             try {
-                if(tfCity.getText().length() > 58){
+                if (tfCity.getText().length() > 58) {
                     tfCity.isFocused();
                     throw new MaxCityCharacterException("The street must be shorter");
-                }else{
+                } else {
                     city = tfCity.getText();
                 }
-            }catch(MaxCityCharacterException e){
+            } catch (MaxCityCharacterException e) {
                 labelErrorCity.setText(e.getMessage());
             }
-            
+
             try {
                 if (!Pattern.matches("\\d{9}$", tfMobile.getText())) {
                     tfMobile.isFocused();
@@ -380,9 +490,9 @@ public class SignUpController {
             } catch (PatternMobileIncorrectException e) {
                 labelErrorMobile.setText(e.getMessage());
             }
-            
+
             boolean active = cbxStatus.selectedProperty().getValue();
-            
+
             newUser = new User(email, password, name, street, mobile, city, zip, active);
 
             //User newUserValidate = ClientFactory.getSignable().signUp(newUser);
