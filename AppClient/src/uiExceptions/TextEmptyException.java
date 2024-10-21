@@ -33,8 +33,8 @@ public class TextEmptyException extends Exception{
      * @param fieldName the name of the field, used in the exception message.
      * @throws TextEmptyException if the field is null or empty.
      */
-    public static void validateNotEmpty(String field, String fieldName) throws TextEmptyException {
-        if (field == null || field.trim().isEmpty()) {
+    public static void validateNotEmpty(String email, String passwrd) throws TextEmptyException {
+        if (passwrd == null || email.trim().isEmpty()) {
             throw new TextEmptyException("The fields cannot be empty.");
         }
     }

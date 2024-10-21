@@ -6,9 +6,13 @@
 package userInterfaceTier.controllers;
 
 import clientBusinessLogic.ClientFactory;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logicalModel.interfaces.Signable;
+import logicalModel.model.User;
 
 /**
  *
@@ -67,12 +72,20 @@ public class MainWindowController {
     private Label lblActive;
 
     private Stage stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+    
+    private Stage signInStage;
+    public void signInStage(Stage signInStage){
+        this.signInStage = stage;
+    }
 
     private Signable signable;
 
-    public void initStage(Parent root) {
+    public void initStage(Parent root, User userSignedIn) {
         Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setTitle("MainWindow");
         Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
@@ -85,9 +98,7 @@ public class MainWindowController {
 
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+    
 
     private void handleExit(ActionEvent event) {
         // Cierra la aplicación
@@ -96,8 +107,29 @@ public class MainWindowController {
     }
     
     private void handleLogOut(ActionEvent event) {
+        try {
+        // Cerrar la ventana actual (Main Window)
         stage.close();
-       
+        
+        // Cargar la ventana de Sign In
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/SignInView.fxml"));
+        Parent root = (Parent) loader.load();
+        
+        // Obtener el controlador de SignIn y configurar la nueva ventana
+        SignInController signInController = loader.getController();
+        
+        // Crear una nueva instancia del Stage para el Sign In
+        Stage signInStage = new Stage();
+        
+        // Asignar el nuevo Stage al controlador
+        signInController.setStage(signInStage);
+        
+        // Inicializar la ventana de Sign In
+        signInController.initStage(root);
+        
+    } catch (IOException e) {
+        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, e);
+    }
     }
 
 }

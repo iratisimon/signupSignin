@@ -115,8 +115,8 @@ public class SignInController {
 
             tfPasswrd.setVisible(false); // Al inicio no es visible
 
-            pfPasswrd.textProperty().addListener(this::passwrdIsVisible);
-            tfPasswrd.textProperty().addListener(this::passwrdIsVisible);
+            pfPasswrd.textProperty().addListener(this::textPropertyChange);
+            tfPasswrd.textProperty().addListener(this::textPropertyChange);
 
             tgbtnEyeIcon.setOnAction(this::handelEyeIconToggleButtonAction);
 
@@ -136,7 +136,7 @@ public class SignInController {
      * @param oldValue the old value of the password field.
      * @param newValue the new value of the password field.
      */
-    public void passwrdIsVisible(ObservableValue observable, String oldValue, String newValue) {
+    public void textPropertyChange(ObservableValue observable, String oldValue, String newValue) {
         
         if (pfPasswrd.isVisible()) {
             tfPasswrd.setText(pfPasswrd.getText());
@@ -177,27 +177,25 @@ public class SignInController {
      */
     @FXML
     private void handleButtonAction(ActionEvent event) throws WrongEmailFormatException, IOException, TextEmptyException {
+      
         String email = this.emailText.getText().trim();
         String passwrd = this.pfPasswrd.getText().trim();
 
+        
         try {
             TextEmptyException.validateNotEmpty(email, passwrd);
 
             WrongEmailFormatException.validateEmail(email);
 
             User user = new User(email, passwrd);
+            //comprobar que existe
             User userSignedIn = ClientFactory.getSignable().signIn(user); 
 
-            //Abrir ventana Main
-            emailText.setText("");
-            tfPasswrd.setText("");
-            pfPasswrd.setText("");
-            lblError.setText("");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/MainWindowView.fxml"));
             Parent root = (Parent) loader.load();
             MainWindowController controller = ((MainWindowController) loader.getController());
-            //controller.setStage(stage);
-            //controller.initStage(root, userSignedIn);
+            controller.setStage(stage);
+            controller.initStage(root, userSignedIn);
         } catch (WrongEmailFormatException e) {
             lblError.setText(e.getMessage());
             logger.severe(e.getLocalizedMessage());

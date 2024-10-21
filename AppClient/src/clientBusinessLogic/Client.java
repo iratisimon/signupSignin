@@ -20,17 +20,23 @@ public class Client implements Signable {
 
     @Override
     public User signIn(User user) {
-        Message message = new Message();
-        User signedInUser = null;
-        MessageType serverMessage;
+        Message request  = new Message();
+        request.setUser(user);
+        request.setMessage(MessageType.SIGN_IN_REQUEST);
         
-        message.setUser(user);
-        message.setMessage(MessageType.SIGN_IN_REQUEST);
+        Message response = ClientSocket.sendRecieveMessage(request);
         
-        
-        
+        // Aquí podrías manejar la respuesta del servidor y devolver el usuario o null en caso de error
+        if (response != null) {
+            // Procesa la respuesta (puedes agregar lógica para validar la respuesta)
+            // Por ejemplo, si la respuesta es OK_RESPONSE, devuelve el usuario
+            if (response.getMessage() == MessageType.OK_RESPONSE) {
+                return response.getUser();
+            } else if (response.getMessage() == MessageType. SIGN_IN_ERROR){
+                return null; //throw
+            }
+        }
         return null;
-        //aqui viene la vaina de los mensajes 
     }
 
     @Override

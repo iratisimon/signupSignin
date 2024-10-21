@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ResourceBundle;
+import logicalModel.message.Message;
 import logicalModel.model.User;
 import uiExceptions.ServerException;
 
@@ -11,39 +13,55 @@ import uiExceptions.ServerException;
  * Clase para establecer una conexión con el servidor y enviar un objeto User.
  */
 public class ClientSocket {
-    private final int PORT=8069 ;
-    private final String IP="127.0.0.1";
 
-    
-    public void iniciar(User user) {
+    public static Message sendRecieveMessage(Message request) {
         Socket socket = null;
-        ObjectInputStream entrada = null;
-        ObjectOutputStream salida = null;
-        
+        ObjectInputStream read = null;
+        ObjectOutputStream write = null;
+        Message response = null;
+
         try {
-            socket = new Socket(IP,PORT);
-            salida = new ObjectOutputStream(socket.getOutputStream());
-            entrada = new ObjectInputStream(socket.getInputStream());
-             
+            ResourceBundle configFile = ResourceBundle.getBundle("config.config");
+            String ip = configFile.getString("IP");
+            int port = Integer.parseInt(configFile.getString("PORT"));
             
-            System.out.println("Conexión establecida con el servidor en " + IP + ":" + PORT);
+            socket = new Socket(ip, port);
             
+            write = new ObjectOutputStream(socket.getOutputStream());
+            read = new ObjectInputStream(socket.getInputStream());
+
             // Enviar el objeto User al servidor
-            salida.writeObject(user);
-            System.out.println("Usuario enviado al servidor: " + user.getEmail());
-            
+            write.writeObject(request);
+
             // Recibir respuesta del servidor
-            String respuesta = (String) entrada.readObject();
-            System.out.println("Respuesta del servidor: " + respuesta);
+            response = (Message) read.readObject();
             
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error en la conexión: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            try {
+                if (socket != null) {
+                    socket.close();
+                }
+                if (read != null) {
+                    read.close();
+                }
+                if (write != null) {
+                    write.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Fin cliente");
         }
+        return response;
+
     }
 
     public static void main(String[] args) throws ServerException {
         ClientSocket clientSocket = new ClientSocket();
         User user = new User();
-        clientSocket.iniciar(user);
     }
 }
