@@ -1,17 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uiExceptions;
 
-/**
- *
- * @author 2dam
- */
-public class PatternZipIncorrectException extends Exception{
+import javafx.scene.control.TextField;
 
-    public PatternZipIncorrectException(String message) {
-        super(message);
+/**
+ * Custom exception for incorrect ZIP code format.
+ * @author Elbire, Meylin
+ */
+public class PatternZipIncorrectException extends Exception {
+
+    // Constructor without error message
+    public PatternZipIncorrectException() {
+    }
+
+    // Constructor with a specific error message
+    public PatternZipIncorrectException(String msg) {
+        super(msg);
+    }
+
+    /**
+     * Static method to validate ZIP code format.
+     * 
+     * @param tfZip ZIP code text field
+     * @throws PatternZipIncorrectException If the ZIP code doesn't follow the 5-digit format
+     */
+    public static void validateZipFormat(TextField tfZip) throws PatternZipIncorrectException {
+        if (!tfZip.getText().matches("\\d{5}$")) {
+            // Throw exception if the ZIP code is not a valid 5-digit number
+            throw new PatternZipIncorrectException("Zip code must have 5 numeric digits");
+        }
     }
 }
