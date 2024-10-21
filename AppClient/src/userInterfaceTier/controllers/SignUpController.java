@@ -58,8 +58,18 @@ import uiExceptions.TextEmptyException;
  */
 public class SignUpController {
 
+    /**
+     * AnchorPane for the layout of the SignUp view.
+     */
     @FXML
     private AnchorPane anchorPane;
+
+    /**
+     * ContextMenu that provides options when right-clicking in the SignUp view.
+     */
+    @FXML
+    private ContextMenu contextMenu;
+
     /**
      * TextField for entering the user's full name.
      */
@@ -67,28 +77,16 @@ public class SignUpController {
     private TextField tfFullName;
 
     /**
-     * Label for displaying validation errors for the full name.
+     * ToggleButton for showing or hiding the password.
      */
     @FXML
-    private Label labelErrorFullName;
+    private ToggleButton tgbEyePasswd;
 
     /**
-     * TextField for entering the user's email address.
+     * ToggleButton for showing or hiding the confirm password.
      */
     @FXML
-    private TextField tfEmail;
-
-    /**
-     * Label for displaying validation errors for the email.
-     */
-    @FXML
-    private Label labelErrorEmail;
-
-    /**
-     * PasswordField for entering the user's password.
-     */
-    @FXML
-    private PasswordField pfHiddenPassword;
+    private ToggleButton tgbEyeConfirmPasswd;
 
     /**
      * TextField for entering the user's password.
@@ -97,76 +95,10 @@ public class SignUpController {
     private TextField tfShowPassword;
 
     /**
-     * PasswordField for confirming the user's password.
-     */
-    @FXML
-    private PasswordField pfHiddenConfirmPassword;
-
-    /**
      * TextField for confirming the user's password.
      */
     @FXML
     private TextField tfShowConfirmPassword;
-
-    /**
-     * Label for displaying validation errors for the password confirmation.
-     */
-    @FXML
-    private Label labelErrorConfirmPasswd;
-
-    /**
-     * TextField for entering the user's street address.
-     */
-    @FXML
-    private TextField tfStreet;
-
-    /**
-     * Label for displaying validation errors for the street address.
-     */
-    @FXML
-    private Label labelErrorStreet;
-
-    /**
-     * TextField for entering the user's ZIP code.
-     */
-    @FXML
-    private TextField tfZip;
-
-    /**
-     * Label for displaying validation errors for the ZIP code.
-     */
-    @FXML
-    private Label labelErrorZip;
-
-    /**
-     * TextField for entering the user's city.
-     */
-    @FXML
-    private TextField tfCity;
-
-    /**
-     * Label for displaying validation errors for the city.
-     */
-    @FXML
-    private Label labelErrorCity;
-
-    /**
-     * TextField for entering the user's mobile phone number.
-     */
-    @FXML
-    private TextField tfMobile;
-
-    /**
-     * Label for displaying validation errors for the mobile phone number.
-     */
-    @FXML
-    private Label labelErrorMobile;
-
-    /**
-     * Label for displaying a general error message when the form is incomplete.
-     */
-    @FXML
-    private Label labelErrorEmpty;
 
     /**
      * CheckBox for marking whether the user is active or not.
@@ -175,10 +107,100 @@ public class SignUpController {
     private CheckBox cbxStatus;
 
     /**
+     * TextField for entering the user's email address.
+     */
+    @FXML
+    private TextField tfEmail;
+
+    /**
+     * TextField for entering the user's street address.
+     */
+    @FXML
+    private TextField tfStreet;
+
+    /**
+     * TextField for entering the user's ZIP code.
+     */
+    @FXML
+    private TextField tfZip;
+
+    /**
+     * TextField for entering the user's city.
+     */
+    @FXML
+    private TextField tfCity;
+
+    /**
+     * TextField for entering the user's mobile phone number.
+     */
+    @FXML
+    private TextField tfMobile;
+
+    /**
+     * PasswordField for entering the user's password.
+     */
+    @FXML
+    private PasswordField pfHiddenPassword;
+
+    /**
+     * PasswordField for confirming the user's password.
+     */
+    @FXML
+    private PasswordField pfHiddenConfirmPassword;
+
+    /**
      * Button to trigger the sign-up process.
      */
     @FXML
     private Button btnSignUp;
+
+    /**
+     * Label for displaying a general error message when the form is incomplete.
+     */
+    @FXML
+    private Label labelErrorEmpty;
+
+    /**
+     * Label for displaying validation errors for the full name.
+     */
+    @FXML
+    private Label labelErrorFullName;
+
+    /**
+     * Label for displaying validation errors for the email.
+     */
+    @FXML
+    private Label labelErrorEmail;
+
+    /**
+     * Label for displaying validation errors for the password confirmation.
+     */
+    @FXML
+    private Label labelErrorConfirmPasswd;
+
+    /**
+     * Label for displaying validation errors for the street address.
+     */
+    @FXML
+    private Label labelErrorStreet;
+
+    /**
+     * Label for displaying validation errors for the ZIP code.
+     */
+    @FXML
+    private Label labelErrorZip;
+
+    /**
+     * Label for displaying validation errors for the city.
+     */
+    @FXML
+    private Label labelErrorCity;
+
+    /**
+     * Label for displaying validation errors for the mobile phone number.
+     */
+    @FXML
+    private Label labelErrorMobile;
 
     /**
      * Hyperlink to navigate to the SignIn view.
@@ -187,72 +209,22 @@ public class SignUpController {
     private Hyperlink hypSignUp;
 
     /**
-     * ImageView to show a tooltip for full name input.
+     * ImageView for toggling the visibility of the password field.
      */
     @FXML
-    private ImageView imgFullName;
+    private ImageView imgEyePasswd;
 
     /**
-     * ImageView to show a tooltip for email input.
+     * ImageView for toggling the visibility of the confirm password field.
      */
     @FXML
-    private ImageView imgEmail;
-
-    /**
-     * ImageView to show a tooltip for password input.
-     */
-    @FXML
-    private ImageView imgPassword;
-
-    /**
-     * ImageView to show a tooltip for password confirmation input.
-     */
-    @FXML
-    private ImageView imgRepeatPassword;
-
-    /**
-     * ImageView to show a tooltip for street address input.
-     */
-    @FXML
-    private ImageView imgStreet;
-
-    /**
-     * ImageView to show a tooltip for ZIP code input.
-     */
-    @FXML
-    private ImageView imgZip;
-
-    /**
-     * ImageView to show a tooltip for city input.
-     */
-    @FXML
-    private ImageView imgCity;
-
-    /**
-     * ImageView to show a tooltip for mobile phone input.
-     */
-    @FXML
-    private ImageView imgMobile;
+    private ImageView imgEyeConfirmPasswd;
 
     /**
      * The stage for displaying the SignUp view.
      */
     private Stage stage;
 
-    @FXML
-    private ToggleButton tgbEyeConfirmPasswd;
-
-    @FXML
-    private ToggleButton tgbEyePasswd;
-
-    @FXML
-    private ImageView imgEyePasswd;
-
-    @FXML
-    private ImageView imgEyeConfirmPasswd;
-
-    @FXML
-    private ContextMenu contextMenu;
     /**
      * Interface for the sign-up business logic.
      */
@@ -284,7 +256,8 @@ public class SignUpController {
         clearErrorLabels();
         setTooltips();
         setPromptText();
-        setUpConextMenu();
+        //Crear un ContextMenu con las opciones: Reset Form, Help, y About App.
+        setUpContextMenu();
 
         //Handle para que el texto cambio de texto en pfHiddenPassword y tfShowPassword.
         pfHiddenPassword.textProperty().addListener(this::passwrdIsVisible);
@@ -381,50 +354,65 @@ public class SignUpController {
         boolean isValid = true;
 
         try {
+            //Validar que todos los campos estén diligenciados
             TextEmptyException.checkFields(tfFullName, tfEmail, pfHiddenPassword, pfHiddenConfirmPassword,
                     tfStreet, tfCity, tfZip, tfMobile);
             try {
+                //Validar que el campo "tfFullName" no contenga números.
                 PatternFullNameIncorrectException.validateFullName(tfFullName);
                 name = tfFullName.getText();
             } catch (PatternFullNameIncorrectException e) {
+                //Si contiene números mostrar en “labelErrorFullName”, exeption “PatternFullNameIncorrectException”.
                 labelErrorFullName.setText(e.getMessage());
             }
             try {
+                //Validar que en el campo "tfEmail" se cumpla con el formato correcto del email introducido y con un maximo de 320 caracteres.
                 PatternEmailIncorrectException.validateEmail(tfEmail);
                 email = tfEmail.getText();
             } catch (PatternEmailIncorrectException e) {
+                //Sino, mostrar en “labelErrorEmail”, exeption “PatternEmailncorrectException”.
                 labelErrorEmail.setText(e.getMessage());
             }
             try {
+                //Validar que el contenido de “pfHiddenConfirmPassword” sea igual al contenido almacenado en “pfHiddenPassword”.
                 PasswdsDontMatchException.validatePasswords(pfHiddenPassword, pfHiddenConfirmPassword);
                 password = pfHiddenPassword.getText();
             } catch (PasswdsDontMatchException e) {
+                //Si no cumple mostrar en “labelErrorConfirmPasswd”, exeption “PasswdsDontMatchException”
                 labelErrorConfirmPasswd.setText(e.getMessage());
             }
             try {
+                //Validar que "pfStreet" no tenga mas de 255 carácteres.
                 MaxStreetCharacterException.validateStreetLength(tfStreet);
                 street = tfStreet.getText();
             } catch (MaxStreetCharacterException e) {
+                //Sino, mostrar en “labelErrorStreet”, exception “MaxStreetCharacterException”.
                 labelErrorStreet.setText(e.getMessage());
             }
             try {
+                //Validar que "tfZip" no tenga letras y que tenga un máximo de 5 números.
                 PatternZipIncorrectException.validateZipFormat(tfZip);
                 zip = Integer.parseInt(tfZip.getText());
             } catch (PatternZipIncorrectException e) {
+                //Sino, mostrar en “labelErrorZip”, exception “PatternZipIncorrectException”.
                 labelErrorZip.setText(e.getMessage());
             }
 
             try {
+                //Validar que "tfCity" tena como máximo 58 caracteres. 
                 MaxCityCharacterException.validateCityLength(tfCity);
                 city = tfCity.getText();
             } catch (MaxCityCharacterException e) {
+                //Si excede mostrar en “labelErrorCity” exception “MaxCityCharacterException”.
                 labelErrorCity.setText(e.getMessage());
             }
 
             try {
+                //Validar que "tfMobile" tenga solo números y un máximo de 9 caracteres.
                 PatternMobileIncorrectException.validateMobileFormat(tfMobile);
                 mobile = Integer.parseInt(tfMobile.getText());
             } catch (PatternMobileIncorrectException e) {
+                //Sino mostrar en “labelErrorMobile” exception “PatternMobileIncorrectException”.
                 labelErrorMobile.setText(e.getMessage());
             }
             //Si se selecciona, el usuario se considerará activo. 
@@ -434,6 +422,7 @@ public class SignUpController {
 
             //User newUserValidate = ClientFactory.getSignable().signUp(newUser);
         } catch (TextEmptyException e) {
+            //Si todos los campos no están diligenciados lazar la  exception “TextEmptyException” en “labelErrorEmpty”.
             labelErrorEmpty.setText(e.getMessage());
         }
 
@@ -455,21 +444,21 @@ public class SignUpController {
 
     private void setTooltips() {
         Tooltip tooltipFN = new Tooltip("Enter your full name");
-        Tooltip.install(imgFullName, tooltipFN);
+        Tooltip.install(tfFullName, tooltipFN);
         Tooltip tooltipE = new Tooltip("Enter your email address");
-        Tooltip.install(imgEmail, tooltipE);
+        Tooltip.install(tfEmail, tooltipE);
         Tooltip tooltipP = new Tooltip("Enter your password");
-        Tooltip.install(imgPassword, tooltipP);
+        Tooltip.install(tfShowPassword, tooltipP);
         Tooltip tooltipRP = new Tooltip("Repeat the password");
-        Tooltip.install(imgRepeatPassword, tooltipRP);
+        Tooltip.install(tfShowConfirmPassword, tooltipRP);
         Tooltip tooltipS = new Tooltip("Enter your street address");
-        Tooltip.install(imgStreet, tooltipS);
+        Tooltip.install(tfStreet, tooltipS);
         Tooltip tooltipZ = new Tooltip("Enter your ZIP code");
-        Tooltip.install(imgZip, tooltipZ);
+        Tooltip.install(tfCity, tooltipZ);
         Tooltip tooltipC = new Tooltip("Enter your city");
-        Tooltip.install(imgCity, tooltipC);
+        Tooltip.install(tfCity, tooltipC);
         Tooltip tooltipM = new Tooltip("Enter your phone number");
-        Tooltip.install(imgMobile, tooltipM);
+        Tooltip.install(tfMobile, tooltipM);
     }
 
     private void setPromptText() {
@@ -508,9 +497,8 @@ public class SignUpController {
         tfMobile.clear();
         cbxStatus.setSelected(false);
     }
-//    Crear un ContextMenu con las opciones: Reset Form, Help, y About App.
 
-    private void setUpConextMenu() {
+    private void setUpContextMenu() {
         contextMenu = new ContextMenu();
 
         //Crear los elementos del menu
@@ -576,7 +564,7 @@ public class SignUpController {
     }
 
     private void showExitConfirmation() {
-       //Mostrar un Alert de tipo CONFIRMATION con el mensaje: "¿Estás seguro de que deseas salir?". 
+        //Mostrar un Alert de tipo CONFIRMATION con el mensaje: "¿Estás seguro de que deseas salir?". 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm Exit");
         alert.setHeaderText("¿Estás seguro de que deseas salir?");
