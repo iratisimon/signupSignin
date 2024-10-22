@@ -8,11 +8,9 @@
 package userInterfaceTier.controllers;
 
 import clientBusinessLogic.ClientFactory;
-import java.awt.Desktop.Action;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Pattern;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -229,6 +227,7 @@ public class SignUpController {
      * Interface for the sign-up business logic.
      */
     private Signable signable;
+    
 
     public void initStage(Parent root) {
         Scene scene = new Scene(root);
@@ -347,11 +346,14 @@ public class SignUpController {
     private void handleSignUp(ActionEvent event) {
         // Limpiar mensajes de error cada que se de al boton btnSignUp
         clearErrorLabels();
-
-        User newUser = null;
+        //Factoria
+        Signable signable;
+        User newUser;
+        User newUserValidate;
+        //Variables para crear un usuario
         String name = null, street = null, city = null, password = null, email = null;
         int zip = 0, mobile = 0;
-        boolean isValid = true;
+        boolean active;
 
         try {
             //Validar que todos los campos estén diligenciados
@@ -417,15 +419,33 @@ public class SignUpController {
             }
             //Si se selecciona, el usuario se considerará activo. 
             // Si no se selecciona, el usuario se considerará inactivo.
-            boolean active = cbxStatus.selectedProperty().getValue();
+            active = cbxStatus.selectedProperty().getValue();
+            /*Una vez que todas las validaciones están realizadas, 
+             *carga los datos de los campos en un objeto User.
+             */
             newUser = new User(email, password, name, street, mobile, city, zip, active);
+            /*Se llama a la factoría “ClientFactory” para conseguir una 
+             *implementación de la interfaz “Signable”  
+             */
+            signable = ClientFactory.getSignable();
+            try {
+                //y se llama al método signUp  pasándole el objeto User.
+                newUserValidate = signable.signUp(newUser);
+                if (newUserValidate != null) {
+                    //Mostrar un Alert de tipo INFORMATION con un mensaje "Registro exitoso". 
+                    new Alert(Alert.AlertType.CONFIRMATION, "You have successfully registered.", ButtonType.OK).showAndWait();
+                    //Después de aceptar el mensaje, se cierra la ventana 
+                    //de SignUp y se devuelve el control a la ventana SignIn.
+                    stage.close();    
+                }
+            } catch (Exception e) {
+                //metenr los errores que nos mande el servidor, que aun no los tengo.
+            }
 
-            //User newUserValidate = ClientFactory.getSignable().signUp(newUser);
         } catch (TextEmptyException e) {
             //Si todos los campos no están diligenciados lazar la  exception “TextEmptyException” en “labelErrorEmpty”.
             labelErrorEmpty.setText(e.getMessage());
         }
-
     }
 
     @FXML
