@@ -23,7 +23,7 @@ import logicalModel.model.User;
  */
 public class Client implements Signable {
 
-    @Override
+    @Override 
     public User signIn(User user) throws  MaxThreadsErrorException, ServerErrorException, SignInErrorException,UserNotActiveException {
         Message request  = new Message();
         request.setUser(user);
