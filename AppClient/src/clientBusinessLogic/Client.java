@@ -23,7 +23,11 @@ import logicalModel.model.User;
  */
 public class Client implements Signable {
 
+<<<<<<< HEAD
     @Override
+=======
+    @Override 
+>>>>>>> origin/MeylinDev
     public User signIn(User user) throws  MaxThreadsErrorException, ServerErrorException, SignInErrorException,UserNotActiveException {
         Message request  = new Message();
         request.setUser(user);
@@ -53,14 +57,6 @@ public class Client implements Signable {
             }
         }
         return resultUser;
-    }
-
-    public void closeApp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void closeSession() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

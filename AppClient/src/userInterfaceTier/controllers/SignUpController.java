@@ -478,7 +478,7 @@ public class SignUpController {
              */
             signable = ClientFactory.getSignable();
             try {
-                //y se llama al método signUp  pasándole el objeto User.
+                //Llamar al método signUp  pasándole el objeto User.
                 newUserValidate = signable.signUp(newUser);
                 if (newUserValidate != null) {
                     //Mostrar un Alert de tipo INFORMATION con un mensaje "Registro exitoso". 
