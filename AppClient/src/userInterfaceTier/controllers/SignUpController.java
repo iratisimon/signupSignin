@@ -37,7 +37,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import logicalModel.interfaces.Signable;
 import logicalModel.model.User;
@@ -227,8 +226,15 @@ public class SignUpController {
      * Interface for the sign-up business logic.
      */
     private Signable signable;
-    
 
+    /**
+     * Initializes and configures the registration window (SignUp).
+     *
+     * @param root The root node to be used for creating the scene of the
+     * window.
+     *
+     * @authors Meylin, Elbire
+     */
     public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -281,10 +287,36 @@ public class SignUpController {
 
     }
 
+    /**
+     * Sets the stage for the current window.
+     *
+     * @param stage The stage to be set for this window.
+     *
+     * This method assigns the provided stage to the instance variable, allowing
+     * further configuration and manipulation of the window as needed.
+     *
+     * @author Elbire
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Synchronizes the text between the password fields and their visible
+     * counterparts.
+     *
+     * This method updates the text of the hidden password fields based on the
+     * visibility of the corresponding visible password fields and vice versa.
+     *
+     * @param observable The observable value that has changed (not used in this
+     * method).
+     * @param oldValue The old value of the observable (not used in this
+     * method).
+     * @param newValue The new value of the observable (not used in this
+     * method).
+     *
+     * @authors Meylin, Elbire
+     */
     public void passwrdIsVisible(ObservableValue observable, String oldValue, String newValue) {
 
         //El texto del "pfHiddenPassword" se copiará en “tfShowPassword” y viceversa.
@@ -303,6 +335,18 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Handles the toggle action for the eye icon buttons to show or hide the
+     * password fields.
+     *
+     * This method updates the visibility of the password fields and the
+     * corresponding images based on whether the toggle buttons for showing or
+     * hiding the password are selected.
+     *
+     * @param event The action event triggered by the toggle button.
+     *
+     * @authors Meylin, Elbire
+     */
     @FXML
     private void handelEyeIconToggleButtonAction(ActionEvent event) {
 
@@ -342,12 +386,17 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Handles the sign-up action when the user clicks the "Sign Up" button.
+     *
+     * @param event The action event triggered by the button click.
+     *
+     * @authors Elbire, Meylin
+     */
     @FXML
     private void handleSignUp(ActionEvent event) {
         // Limpiar mensajes de error cada que se de al boton btnSignUp
         clearErrorLabels();
-        //Factoria
-        Signable signable;
         User newUser;
         User newUserValidate;
         //Variables para crear un usuario
@@ -436,7 +485,7 @@ public class SignUpController {
                     new Alert(Alert.AlertType.CONFIRMATION, "You have successfully registered.", ButtonType.OK).showAndWait();
                     //Después de aceptar el mensaje, se cierra la ventana 
                     //de SignUp y se devuelve el control a la ventana SignIn.
-                    stage.close();    
+                    stage.close();
                 }
             } catch (Exception e) {
                 //metenr los errores que nos mande el servidor, que aun no los tengo.
@@ -448,6 +497,16 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Handles the action when the user clicks on the hyperlink to sign in.
+     *
+     * This method attempts to load the SignIn view and close the current stage.
+     * If an error occurs during the loading process, it logs the exception.
+     *
+     * @param event The action event triggered by the hyperlink click.
+     *
+     * @author Elbire
+     */
     @FXML
     private void handleHyperLinkSignIn(ActionEvent event) {
         try {
@@ -462,6 +521,14 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Sets tooltips for the input fields in the SignUp form.
+     *
+     * Each tooltip provides a hint to the user about what to enter in the
+     * corresponding field.</p>
+     *
+     * @author Elbire
+     */
     private void setTooltips() {
         Tooltip tooltipFN = new Tooltip("Enter your full name");
         Tooltip.install(tfFullName, tooltipFN);
@@ -481,6 +548,14 @@ public class SignUpController {
         Tooltip.install(tfMobile, tooltipM);
     }
 
+    /**
+     * Sets the prompt text for the input fields in the SignUp form.
+     *
+     * This method configures the prompt text that appears in each input field,
+     * providing users with a hint about the expected input.
+     *
+     * @author Meylin
+     */
     private void setPromptText() {
         tfFullName.setPromptText("Enter your full name");
         tfEmail.setPromptText("Enter your email (ej.ejemplo@correo.com)");
@@ -495,6 +570,15 @@ public class SignUpController {
 
     }
 
+    /**
+     * Clears the error messages displayed in the SignUp form.
+     *
+     * This method resets the text of all error label components to an empty
+     * string, effectively removing any error messages that may have been
+     * displayed to the user.
+     *
+     * @author Elbire
+     */
     private void clearErrorLabels() {
         labelErrorFullName.setText("");
         labelErrorEmail.setText("");
@@ -506,6 +590,15 @@ public class SignUpController {
         labelErrorEmpty.setText("");
     }
 
+    /**
+     * Clears all input fields in the SignUp form.
+     *
+     * This method resets the values of all form fields to their default state.
+     * Specifically, it clears the text from the following input fields and sets
+     * the status checkbox to unchecked
+     *
+     * @author Elbire
+     */
     private void clearForm() {
         tfFullName.clear();
         tfEmail.clear();
@@ -518,6 +611,18 @@ public class SignUpController {
         cbxStatus.setSelected(false);
     }
 
+    /**
+     * Sets up the context menu for the SignUp form.
+     *
+     * This method creates a context menu that provides users with options to
+     * reset the form, access help, and view information about the application.
+     *
+     * Each menu item has an associated action handler that executes when the
+     * item is selected. The context menu is displayed when the user
+     * right-clicks anywhere in the SignUp window.
+     *
+     * @authors Meylin, Elbire
+     */
     private void setUpContextMenu() {
         contextMenu = new ContextMenu();
 
@@ -535,6 +640,16 @@ public class SignUpController {
         anchorPane.setOnMouseClicked(this::showContextMenu);
     }
 
+    /**
+     * Displays the context menu when the user right-clicks on the SignUp form.
+     *
+     * This method checks if the right mouse button (secondary button) was
+     * clicked. If so, it shows the context menu at the position of the mouse
+     * cursor. If any other mouse button is clicked, the context menu is hidden.
+     *
+     * @param event The mouse event that triggered this method.
+     * @authors Meylin, Elbire
+     */
     private void showContextMenu(MouseEvent event) {
         if (event.getButton() == MouseButton.SECONDARY) {
             contextMenu.show(anchorPane, event.getScreenX(), event.getScreenY());
@@ -543,12 +658,32 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Resets the SignUp form to its default values.
+     *
+     * This method clears all input fields in the form, setting them back to
+     * their default (empty) state. It also clears any error messages that may
+     * be displayed to the user.
+     *
+     * @param event The action event that triggered this method.
+     * @authors Meylin, Elbire
+     */
     private void handleResetForm(ActionEvent event) {
         //Todos los campos del formulario se restablecen a sus valores predeterminados (vacíos).
         clearForm();
         clearErrorLabels();
     }
 
+    /**
+     * Displays a dialog with common errors and security recommendations for
+     * creating an account.
+     *
+     * This method shows an information alert dialog that provides users with
+     * tips on creating a secure password.
+     *
+     * @param event The action event that triggered this method.
+     * @authors Meylin, Elbire
+     */
     private void handleHelp(ActionEvent event) {
         //Se muestra un cuadro de diálogo (Alert) con errores comunes y recomendaciones de seguridad para crear la cuenta. 
         Alert alert = new Alert(AlertType.INFORMATION);
@@ -561,6 +696,16 @@ public class SignUpController {
         alert.showAndWait();
     }
 
+    /**
+     * Displays a dialog with information about the application, including its
+     * name, version, authors, and purpose.
+     *
+     * This method shows an information alert dialog that provides users with
+     * details about the application.
+     *
+     * @param event The action event that triggered this method.
+     * @authors Meylin, Elbire
+     */
     private void handleAboutApp(ActionEvent event) {
         //Se muestra un cuadro de diálogo (Alert) con información sobre la aplicación: nombre, versión, autoras, y propósito de la app.
 
@@ -578,21 +723,45 @@ public class SignUpController {
         alert.showAndWait();
     }
 
+    /**
+     * Handles the window close request event by showing a confirmation dialog
+     * before closing the application.
+     *
+     * This method consumes the close request event and invokes a confirmation
+     * dialog to ask the user if they really want to exit the application
+     *
+     * @param event The window event that triggered this method.
+     * @authors Meylin
+     */
     private void handleCloseRequest(WindowEvent event) {
         event.consume();
         showExitConfirmation();
     }
 
+    /**
+     * Displays a confirmation dialog asking the user if they are sure they want
+     * to exit the application.
+     *
+     * @authors Meylin
+     */
     private void showExitConfirmation() {
         //Mostrar un Alert de tipo CONFIRMATION con el mensaje: "¿Estás seguro de que deseas salir?". 
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm Exit");
-        alert.setHeaderText("¿Estás seguro de que deseas salir?");
+        alert.setHeaderText("Are you sure you want to exit?");
         alert.showAndWait();
         ButtonType response = alert.getResult();
         handleCloseConfirmation(response);
     }
 
+    /**
+     * Handles the confirmation response when the user attempts to close the
+     * application.
+     *
+     *
+     * @param response The user's response to the exit confirmation dialog.
+     * @authors Meylin
+     */
     public void handleCloseConfirmation(ButtonType response) {
         if (response == ButtonType.OK) {
             //  Si el usuario confirma, cerrar la ventana y abrir la ventana Sign In. 
