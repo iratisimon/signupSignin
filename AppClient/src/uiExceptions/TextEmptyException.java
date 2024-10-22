@@ -31,7 +31,7 @@ public class TextEmptyException extends Exception {
      * @param tfMobile Mobile phone field
      * @throws TextEmptyException If any field is empty
      */
-    public static void checkFields(TextField tfFullName, TextField tfEmail, PasswordField pfHiddenPassword,
+    public static void checkFieldsSignUp(TextField tfFullName, TextField tfEmail, PasswordField pfHiddenPassword,
                                    PasswordField pfHiddenConfirmPassword, TextField tfStreet, TextField tfCity,
                                    TextField tfZip, TextField tfMobile) throws TextEmptyException {
 
@@ -41,6 +41,20 @@ public class TextEmptyException extends Exception {
 
             // Throw exception if any field is empty
             throw new TextEmptyException("You must fill all the parameters");
+}}
+
+    /**
+     * Validates that the specified field is not empty. If the field is empty,
+     * a TextEmptyException is thrown with an appropriate message.
+     * 
+     * @param field the string to be validated.
+     * @param fieldName the name of the field, used in the exception message.
+     * @throws TextEmptyException if the field is null or empty.
+     */
+    public static void checkFieldsSignIn(String email, String passwrd) throws TextEmptyException {
+        if (passwrd == null || email.trim().isEmpty()) {
+            throw new TextEmptyException("The fields cannot be empty.");
+
         }
     }
 }
