@@ -55,6 +55,29 @@ public class Client implements Signable {
 
     @Override
     public User signUp(User user) throws ServerErrorException, UserExistErrorException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Message request = new Message();
+        request.setUser(user);
+        request.setMessage(MessageType.SIGN_UP_REQUEST);
+
+        Message response = ClientSocket.sendRecieveMessage(request);
+
+        if (response == null) {
+            throw new ServerErrorException("No response from server.");
+        }
+
+        // Creamos una variable para guardar el usuario
+        User resultUser = null;
+
+        // Aquí podrías manejar la respuesta del servidor y devolver el usuario o null en caso de error
+        if (response != null) {
+            if (response.getMessage() == MessageType.OK_RESPONSE) {
+                resultUser = response.getUser();
+            } else if (response.getMessage() == MessageType.SERVER_ERROR) {
+                throw new ServerErrorException("Internal server error");
+            } else if (response.getMessage() == MessageType.USER_EXISTS_ERROR) {
+                throw new UserExistErrorException("The user alredy exists");
+            } 
+        }
+        return resultUser;
     }
 }
