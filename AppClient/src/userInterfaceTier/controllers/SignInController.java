@@ -25,6 +25,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import logicalExceptions.MaxThreadsErrorException;
+import logicalExceptions.ServerErrorException;
+import logicalExceptions.SignInErrorException;
+import logicalExceptions.UserNotActiveException;
 import logicalModel.model.User;
 import uiExceptions.WrongEmailFormatException;
 
@@ -102,17 +106,19 @@ public class SignInController {
             logger.info("Initializizng Sign In stage");
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            //El nombre de la ventana es “Sign In”.
             stage.setTitle("Sign In");
+            //Ventana no redimensionable.
             stage.setResizable(false);
-          
             Image icon = new Image(getClass().getResourceAsStream("/resources/images/catrina.png"));
             stage.getIcons().add(icon);
-
+            //Se enfoca el campo Email dado que es el primer campo que el usuario deberá rellenar
             emailText.isFocused();
+            //El icono del ToggleButton será el ojo que muestre la contraseña.
             ivEyeIcon.setImage(new Image("/resources/images/ShowPasswd.png"));
             lblError.setText("");
             btnAccept.setDefaultButton(true);
-
+            //El usuario ingresa la contraseña en el pfPassword. 
             tfPasswrd.setVisible(false); // Al inicio no es visible
 
             pfPasswrd.textProperty().addListener(this::textPropertyChange);
@@ -137,10 +143,10 @@ public class SignInController {
      * @param newValue the new value of the password field.
      */
     public void textPropertyChange(ObservableValue observable, String oldValue, String newValue) {
-        
+        //La contraseña ingresada en el campo pfPasswrd se replica en el campo de texto tfPasswrd.
         if (pfPasswrd.isVisible()) {
             tfPasswrd.setText(pfPasswrd.getText());
-
+        //Si el campo que esta visible es el tfPasswrd entonces la contraseña se replicará en el campo pfPasswrd.
         } else if (tfPasswrd.isVisible()) {
             pfPasswrd.setText(tfPasswrd.getText());
         }
@@ -154,12 +160,12 @@ public class SignInController {
     @FXML
     public void handelEyeIconToggleButtonAction(ActionEvent event) {
         if (tgbtnEyeIcon.isSelected()) {
-            pfPasswrd.setVisible(false);
+            pfPasswrd.setVisible(false); // Ocultar el PasswordField
             tfPasswrd.setVisible(true);  // Mostrar el TextField (contraseña visible)
             // Cambiar el icono al de "contraseña visible"
             ivEyeIcon.setImage(new Image("/resources/images/HidePasswd.png"));
         } else {
-            tfPasswrd.setVisible(false);
+            tfPasswrd.setVisible(false); // Mostrar el PasswordField
             pfPasswrd.setVisible(true);  // Ocultar el TextField (contraseña visible)
             // Cambiar el icono al de "contraseña oculta"
             ivEyeIcon.setImage(new Image("/resources/images/ShowPasswd.png"));
@@ -176,21 +182,22 @@ public class SignInController {
      * @throws TextEmptyException if any input field is empty.
      */
     @FXML
-    private void handleButtonAction(ActionEvent event) throws WrongEmailFormatException, IOException, TextEmptyException {
+    private void handleButtonAction(ActionEvent event) throws WrongEmailFormatException, IOException, TextEmptyException, MaxThreadsErrorException, ServerErrorException, SignInErrorException, UserNotActiveException {
       
         String email = this.emailText.getText().trim();
         String passwrd = this.pfPasswrd.getText().trim();
 
         
         try {
+            // se valida que los campos email y contraseña estén rellenados, en caso contrario se informa al usuario de que debe rellenarlos para poder continuar mediante la excepción: “TextEmptyException”.
             TextEmptyException.validateNotEmpty(email, passwrd);
-
+            // se valida que el email introducido tiene el formato válido, en caso contrario se informa al usuario mediante la excepción propia: “WrongEmailFormatException”. 
             WrongEmailFormatException.validateEmail(email);
 
             User user = new User(email, passwrd);
-            //comprobar que existe
+            //comprobar que existe + implementar excepciones
             User userSignedIn = ClientFactory.getSignable().signIn(user); 
-
+            // Si los datos son correctos y el usuario se encuentra activo, se abrirá la ventana “MainWindowView” pasandole el user.
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/MainWindowView.fxml"));
             Parent root = (Parent) loader.load();
             MainWindowController controller = ((MainWindowController) loader.getController());
