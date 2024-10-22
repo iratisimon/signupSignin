@@ -35,20 +35,21 @@ import logicalExceptions.ServerErrorException;
 import logicalExceptions.SignInErrorException;
 import logicalExceptions.UserNotActiveException;
 import logicalModel.model.User;
-import uiExceptions.WrongEmailFormatException;
+import uiExceptions.PatternEmailIncorrectException;
 
 /**
- * The SignInController class manages the sign-in functionality of the application.
- * It handles user input for email and password, validates the input, and manages
- * the visibility of password fields. It also controls the navigation to other
- * application views.
- * 
- * This class utilizes JavaFX for the user interface and includes methods
- * to handle button actions, password visibility, and transitions between views.
- * 
+ * The SignInController class manages the sign-in functionality of the
+ * application. It handles user input for email and password, validates the
+ * input, and manages the visibility of password fields. It also controls the
+ * navigation to other application views.
+ *
+ * This class utilizes JavaFX for the user interface and includes methods to
+ * handle button actions, password visibility, and transitions between views.
+ *
  * @author Irati
  */
 public class SignInController {
+
     /**
      * Constructs a new SignInController instance.
      */
@@ -83,18 +84,18 @@ public class SignInController {
 
     private Stage stage;
 
-     /**
+    /**
      * Sets the stage for this controller.
-     * 
+     *
      * @param stage the stage to be set.
      */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
+
     /**
      * Returns the current stage of the controller.
-     * 
+     *
      * @return the current stage.
      */
     public Stage getStage() {
@@ -103,7 +104,7 @@ public class SignInController {
 
     /**
      * Initializes the stage with the specified root node.
-     * 
+     *
      * @param root the root node for the scene.
      */
     public void initStage(Parent root) {
@@ -142,7 +143,7 @@ public class SignInController {
 
     /**
      * Updates the visibility of the password fields based on user interaction.
-     * 
+     *
      * @param observable the observable value.
      * @param oldValue the old value of the password field.
      * @param newValue the new value of the password field.
@@ -151,15 +152,15 @@ public class SignInController {
         //La contraseña ingresada en el campo pfPasswrd se replica en el campo de texto tfPasswrd.
         if (pfPasswrd.isVisible()) {
             tfPasswrd.setText(pfPasswrd.getText());
-        //Si el campo que esta visible es el tfPasswrd entonces la contraseña se replicará en el campo pfPasswrd.
+            //Si el campo que esta visible es el tfPasswrd entonces la contraseña se replicará en el campo pfPasswrd.
         } else if (tfPasswrd.isVisible()) {
             pfPasswrd.setText(tfPasswrd.getText());
         }
     }
 
-     /**
+    /**
      * Handles the action of the eye icon toggle button.
-     * 
+     *
      * @param event the action event triggered by the button.
      */
     @FXML
@@ -178,53 +179,50 @@ public class SignInController {
     }
 
     /**
-     * Handles the action of the accept button.
-     * Validates email and password input, then attempts to sign in the user.
-     * 
+     * Handles the action of the accept button. Validates email and password
+     * input, then attempts to sign in the user.
+     *
      * @param event the action event triggered by the button.
      * @throws WrongEmailFormatException if the email format is incorrect.
      * @throws IOException if an input or output exception occurs.
      * @throws TextEmptyException if any input field is empty.
      */
     @FXML
-    private void handleButtonAction(ActionEvent event) throws WrongEmailFormatException, IOException, TextEmptyException, MaxThreadsErrorException, ServerErrorException, SignInErrorException, UserNotActiveException {
-      
+    private void handleButtonAction(ActionEvent event) throws PatternEmailIncorrectException, IOException, TextEmptyException, MaxThreadsErrorException, ServerErrorException, SignInErrorException, UserNotActiveException {
+
         String email = this.emailText.getText().trim();
         String passwrd = this.pfPasswrd.getText().trim();
 
-        
         try {
             // se valida que los campos email y contraseña estén rellenados, en caso contrario se informa al usuario de que debe rellenarlos para poder continuar mediante la excepción: “TextEmptyException”.
-            TextEmptyException.validateNotEmpty(email, passwrd);
-            // se valida que el email introducido tiene el formato válido, en caso contrario se informa al usuario mediante la excepción propia: “WrongEmailFormatException”. 
-            WrongEmailFormatException.validateEmail(email);
-
+            TextEmptyException.checkFieldsSignIn(email, passwrd);
+            // se valida que el email introducido tiene el formato válido, en caso contrario se informa al usuario mediante la excepción propia: “WrongEmailFormatException”.
+            PatternEmailIncorrectException.validateEmail(emailText);
             User user = new User(email, passwrd);
             //comprobar que existe + implementar excepciones
-            User userSignedIn = ClientFactory.getSignable().signIn(user); 
+            User userSignedIn = ClientFactory.getSignable().signIn(user);
             // Si los datos son correctos y el usuario se encuentra activo, se abrirá la ventana “MainWindowView” pasandole el user.
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/userInterfaceTier/view/MainWindowView.fxml"));
             Parent root = (Parent) loader.load();
             MainWindowController controller = ((MainWindowController) loader.getController());
             controller.setStage(stage);
             controller.initStage(root, userSignedIn);
-        } catch (WrongEmailFormatException e) {
+        } catch (PatternEmailIncorrectException e) {
             lblError.setText(e.getMessage());
             logger.severe(e.getLocalizedMessage());
-        } catch (TextEmptyException e) {
-            lblError.setText(e.getMessage());
-            logger.severe(e.getMessage());
+
         }
     }
 
     /**
-     * Handles the action of the sign-up hyperlink.
-     * Navigates to the sign-up view.
-     * 
+     * Handles the action of the sign-up hyperlink. Navigates to the sign-up
+     * view.
+     *
      * @param event the action event triggered by the hyperlink.
      */
     @FXML
-    private void handelSignUpHyperlink(ActionEvent event) {
+    private void handelSignUpHyperlink(ActionEvent event
+    ) {
         try {
             //Abrir ventana SignUp
             emailText.setText("");

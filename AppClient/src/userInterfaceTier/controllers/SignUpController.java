@@ -406,7 +406,7 @@ public class SignUpController {
 
         try {
             //Validar que todos los campos estén diligenciados
-            TextEmptyException.checkFields(tfFullName, tfEmail, pfHiddenPassword, pfHiddenConfirmPassword,
+            TextEmptyException.checkFieldsSignUp(tfFullName, tfEmail, pfHiddenPassword, pfHiddenConfirmPassword,
                     tfStreet, tfCity, tfZip, tfMobile);
             try {
                 //Validar que el campo "tfFullName" no contenga números.
