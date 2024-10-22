@@ -14,7 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import userInterfaceTier.controllers.SignInController;
+import userInterfaceTier.controllers.*;
 
 /**
  * The ClientApplication class is the entry point for the JavaFX application.
